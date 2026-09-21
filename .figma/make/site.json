@@ -1,0 +1,10 @@
+{
+  "description": "Interactive visual novel game teaches conversational Sanskrit through engaging dialogues with audio support and branching storylines for immersive learning.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
