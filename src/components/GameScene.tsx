@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { LEVELS, DialogueNode } from '../data/gameData';
+import { Choice, LEVELS, DialogueNode } from '../data/gameData';
 import CharacterSprite from './CharacterSprite';
 import LevelComplete from './LevelComplete';
 import Icon from './Icon';
@@ -13,6 +13,7 @@ interface GameSceneProps {
   onNextLevel?: () => void;
   onExit: () => void;
   onLevelComplete: (levelNumber: number) => void;
+  onWrongAnswer: () => void;
   externalSettingsOpen?: boolean;
   onExternalSettingsClose?: () => void;
 }
@@ -25,6 +26,7 @@ export default function GameScene({
   onNextLevel,
   onExit,
   onLevelComplete,
+  onWrongAnswer,
   externalSettingsOpen = false,
   onExternalSettingsClose,
 }: GameSceneProps) {
@@ -34,16 +36,19 @@ export default function GameScene({
   const [volume, setVolume] = useState(80);
   const [textSize, setTextSize] = useState(0);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
+  const [wrongChoice, setWrongChoice] = useState<Choice | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const node: DialogueNode = level.nodes[currentNodeId];
   const isLastLevel = levelIndex === LEVELS.length - 1;
   const nextLevel = !isLastLevel ? LEVELS[levelIndex + 1] : null;
+  const correctChoice = node.choices.find(choice => choice.isCorrect);
   const sceneClass = `game-scene game-level-${level.id}${textSize === 1 ? ' game-large-text' : ''}`;
 
   useEffect(() => {
     setCurrentNodeId(level.startNodeId);
     setShowComplete(false);
+    setWrongChoice(null);
     stopAudio();
   }, [levelIndex]);
 
@@ -84,13 +89,35 @@ export default function GameScene({
     setShowComplete(true);
   }
 
-  function handleChoice(nextNodeId: string | 'END') {
+  function advanceChoice(nextNodeId: string | 'END') {
     if (nextNodeId === 'END') {
       completeLevel();
       return;
     }
 
     setCurrentNodeId(nextNodeId);
+  }
+
+  function handleChoice(choice: Choice) {
+    if (choice.isCorrect === false) {
+      stopAudio();
+      onWrongAnswer();
+      setWrongChoice(choice);
+      return;
+    }
+
+    advanceChoice(choice.nextNodeId);
+  }
+
+  function handleRetry() {
+    setWrongChoice(null);
+  }
+
+  function handleRecovery() {
+    if (!wrongChoice || wrongChoice.nextNodeId === 'END') return;
+
+    setWrongChoice(null);
+    setCurrentNodeId(wrongChoice.nextNodeId);
   }
 
   function stopAudio() {
@@ -108,6 +135,7 @@ export default function GameScene({
     stopAudio();
     setCurrentNodeId(level.startNodeId);
     setShowComplete(false);
+    setWrongChoice(null);
   }
 
   function handleNext() {
@@ -242,7 +270,38 @@ export default function GameScene({
           Choose your response
         </div>
 
-        {node.choices.length === 0 ? (
+        {wrongChoice ? (
+          <article className="wrong-feedback" role="alert">
+            <div className="wrong-feedback-heading">
+              <span>−10 points</span>
+              <h2>Not quite</h2>
+            </div>
+
+            <p>{wrongChoice.feedback ?? 'That response does not fit this conversation.'}</p>
+
+            {correctChoice && (
+              <div className="better-response">
+                <span>Better response</span>
+                <strong>{correctChoice.choiceText}</strong>
+                <small>{correctChoice.choiceTranslation}</small>
+              </div>
+            )}
+
+            <div className="wrong-feedback-actions">
+              <button className="button button-secondary" onClick={handleRetry}>
+                <Icon name="replay" size={19} />
+                Try again
+              </button>
+
+              {wrongChoice.nextNodeId !== 'END' && (
+                <button className="button button-teal" onClick={handleRecovery}>
+                  Continue with help
+                  <Icon name="arrow" size={19} />
+                </button>
+              )}
+            </div>
+          </article>
+        ) : node.choices.length === 0 ? (
           <button
             className="finish-level-button"
             onClick={completeLevel}
@@ -260,7 +319,7 @@ export default function GameScene({
                 <button
                   className="choice-main"
                   onClick={() =>
-                    handleChoice(choice.nextNodeId)
+                    handleChoice(choice)
                   }
                 >
                   <span className="choice-letter">
