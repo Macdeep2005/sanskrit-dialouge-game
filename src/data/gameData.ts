@@ -5,6 +5,8 @@ export interface Choice {
   choiceAudioPath: string;
   /** Whether this response advances the learner's intended path. */
   isCorrect?: boolean;
+  /** Short learning feedback shown after an incorrect response. */
+  feedback?: string;
   nextNodeId: string | 'END';
 }
 
@@ -73,6 +75,7 @@ export const LEVELS: Level[] = [
             choiceTranslation: 'Sorry, I want to play.',
             choiceAudioPath: '/audio/level1/c1b.mp3',
             isCorrect: false,
+            feedback: 'The teacher asked about your homework, not playtime.',
             nextNodeId: 'c2b',
           },
         ],
@@ -101,6 +104,7 @@ export const LEVELS: Level[] = [
             choiceTranslation: 'Sorry, I forgot the book.',
             choiceAudioPath: '/audio/level1/c2a2.mp3',
             isCorrect: false,
+            feedback: 'The teacher asked to see your homework, so you need to show it.',
             nextNodeId: 'END',
           },
         ],
@@ -121,6 +125,7 @@ export const LEVELS: Level[] = [
             choiceTranslation: 'No, I will play again.',
             choiceAudioPath: '/audio/level1/c2b1.mp3',
             isCorrect: false,
+            feedback: 'The teacher asked you to finish your homework before playing.',
             nextNodeId: 'END',
           },
           {
