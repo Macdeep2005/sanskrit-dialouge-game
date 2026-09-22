@@ -1,4 +1,4 @@
-import Icon from './Icon';
+import Icon from "./Icon";
 
 interface HomeScreenProps {
   onStart: () => void;
@@ -6,22 +6,22 @@ interface HomeScreenProps {
 
 const steps = [
   {
-    number: '01',
-    title: 'Listen',
-    description: 'Read each Sanskrit line before responding.',
-    icon: 'volume' as const,
+    number: "01",
+    title: "Listen",
+    description: "Read each Sanskrit line before responding.",
+    icon: "volume" as const,
   },
   {
-    number: '02',
-    title: 'Choose',
-    description: 'Make dialogue choices and follow each story.',
-    icon: 'arrow' as const,
+    number: "02",
+    title: "Choose",
+    description: "Make dialogue choices and follow each story.",
+    icon: "arrow" as const,
   },
   {
-    number: '03',
-    title: 'Progress',
-    description: 'Earn points and stars as you complete scenarios.',
-    icon: 'star' as const,
+    number: "03",
+    title: "Progress",
+    description: "Earn points and stars as you complete scenarios.",
+    icon: "star" as const,
   },
 ];
 
@@ -33,17 +33,21 @@ export default function HomeScreen({ onStart }: HomeScreenProps) {
 
       <section className="home-card" aria-labelledby="home-title">
         <div className="home-title-row">
-          <div className="home-mark" aria-hidden="true">सं</div>
+          <div className="home-mark" aria-hidden="true">
+            सं
+          </div>
 
           <div>
             <p className="home-kicker">Learn through conversation</p>
-            <h1 id="home-title">Sanskrit Dialogue <span>Game</span></h1>
+            <h1 id="home-title">
+              Sanskrit Dialogue <span>Game</span>
+            </h1>
             <p className="home-sanskrit">संस्कृत संवाद</p>
           </div>
         </div>
 
         <div className="home-steps">
-          {steps.map(step => (
+          {steps.map((step) => (
             <article className="home-step" key={step.number}>
               <div>
                 <span>{step.number}</span>
@@ -55,12 +59,13 @@ export default function HomeScreen({ onStart }: HomeScreenProps) {
           ))}
         </div>
 
-        <button className="button button-primary home-start-button" onClick={onStart}>
+        <button
+          className="button button-primary home-start-button"
+          onClick={onStart}
+        >
           <Icon name="play" size={21} />
           Start Playing
         </button>
-
-        <p className="home-note">No sign-in required. Three everyday scenarios, one conversation at a time.</p>
       </section>
     </main>
   );
