@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import GameScene from './components/GameScene';
 import Icon from './components/Icon';
 import { LEVELS } from './data/gameData';
@@ -9,15 +9,18 @@ export default function App() {
   const [stars, setStars] = useState(0);
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const awardedLevels = useRef(new Set<number>());
 
   function awardLevel(levelNumber: number) {
+    if (awardedLevels.current.has(levelNumber)) return;
+
+    awardedLevels.current.add(levelNumber);
+    setPoints(value => value + 50);
+    setStars(value => value + 3);
     setCompletedLevels(current => {
-      if (current.includes(levelNumber)) return current;
-
-      setPoints(value => value + 50);
-      setStars(value => value + 3);
-
-      return [...current, levelNumber];
+      return current.includes(levelNumber)
+        ? current
+        : [...current, levelNumber];
     });
   }
 
