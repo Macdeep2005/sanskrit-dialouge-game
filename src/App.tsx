@@ -24,6 +24,10 @@ export default function App() {
     });
   }
 
+  function deductPointsForWrongAnswer() {
+    setPoints(value => value - 10);
+  }
+
   function goToNextLevel() {
     setCurrentLevel(current =>
       Math.min(current + 1, LEVELS.length - 1)
@@ -125,6 +129,7 @@ export default function App() {
             points={points}
             stars={stars}
             onLevelComplete={awardLevel}
+            onWrongAnswer={deductPointsForWrongAnswer}
             onNextLevel={goToNextLevel}
             onExit={() => {}}
             externalSettingsOpen={settingsOpen}
