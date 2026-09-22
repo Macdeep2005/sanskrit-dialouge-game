@@ -82,6 +82,16 @@
 .choice-copy small { color: var(--slate); font-size: .9rem; }
 .choice-audio { border: 0; border-left: 1px solid var(--slate-light); border-radius: 0; }
 .finish-level-button { width: min(600px, 100%); min-height: 64px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 9px; border: 0; border-radius: 17px; color: var(--white); background: var(--teal-dark); font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; }
+.wrong-feedback { width: min(720px, 100%); margin: 0 auto; padding: 20px; border: 3px solid var(--brown); border-radius: 18px; color: var(--navy); background: rgba(255,255,255,.98); box-shadow: 0 12px 30px rgba(15,23,42,.24); }
+.wrong-feedback-heading { display: flex; align-items: center; gap: 10px; }
+.wrong-feedback-heading span { padding: 5px 9px; border-radius: 999px; color: var(--white); background: var(--brown); font-size: .78rem; font-weight: 800; }
+.wrong-feedback h2 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; }
+.wrong-feedback > p { margin: 10px 0 14px; color: var(--slate); }
+.better-response { display: grid; gap: 3px; padding: 12px; border-radius: 12px; background: var(--cream); }
+.better-response span { color: var(--teal-dark); font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.better-response strong { font-family: var(--font-devanagari); font-size: 1.1rem; }
+.better-response small { color: var(--slate); }
+.wrong-feedback-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 16px; }
 .game-large-text .dialogue-sanskrit { font-size: clamp(1.65rem, 2.3vw, 2.1rem); }
 .game-large-text .dialogue-english, .game-large-text .choice-copy small { font-size: 1.08rem; }
 .game-large-text .choice-copy strong { font-size: 1.38rem; }
