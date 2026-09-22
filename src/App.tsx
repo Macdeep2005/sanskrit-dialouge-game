@@ -25,7 +25,7 @@ export default function App() {
   }
 
   function deductPointsForWrongAnswer() {
-    setPoints(value => value - 10);
+    setPoints(value => Math.max(0, value - 10));
   }
 
   function goToNextLevel() {
