@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
 import GameScene from './components/GameScene';
+import HomeScreen from './components/HomeScreen';
 import Icon from './components/Icon';
 import { LEVELS } from './data/gameData';
 
 export default function App() {
+  const [showHome, setShowHome] = useState(true);
   const [currentLevel, setCurrentLevel] = useState(0);
   const [points, setPoints] = useState(0);
   const [stars, setStars] = useState(0);
@@ -32,6 +34,10 @@ export default function App() {
     setCurrentLevel(current =>
       Math.min(current + 1, LEVELS.length - 1)
     );
+  }
+
+  if (showHome) {
+    return <HomeScreen onStart={() => setShowHome(false)} />;
   }
 
   return (
@@ -131,7 +137,7 @@ export default function App() {
             onLevelComplete={awardLevel}
             onWrongAnswer={deductPointsForWrongAnswer}
             onNextLevel={goToNextLevel}
-            onExit={() => {}}
+            onExit={() => setShowHome(true)}
             externalSettingsOpen={settingsOpen}
             onExternalSettingsClose={() => setSettingsOpen(false)}
           />
