@@ -3,6 +3,8 @@ export interface Choice {
   choiceText: string;
   choiceTranslation: string;
   choiceAudioPath: string;
+  /** Whether this response advances the learner's intended path. */
+  isCorrect?: boolean;
   nextNodeId: string | 'END';
 }
 
@@ -62,13 +64,15 @@ export const LEVELS: Level[] = [
             choiceText: 'आम्, सर्वम् समाप्तम्।',
             choiceTranslation: 'Yes, all is finished.',
             choiceAudioPath: '/audio/level1/c1a.mp3',
+            isCorrect: true,
             nextNodeId: 'c2a',
           },
           {
             id: 'c1b',
-            choiceText: 'न, मया पाठः न गृहीतः।',
-            choiceTranslation: "No, I didn't understand the lesson.",
+            choiceText: 'क्षम्यताम्, अहं क्रीडितुं इच्छामि।',
+            choiceTranslation: 'Sorry, I want to play.',
             choiceAudioPath: '/audio/level1/c1b.mp3',
+            isCorrect: false,
             nextNodeId: 'c2b',
           },
         ],
@@ -88,6 +92,7 @@ export const LEVELS: Level[] = [
             choiceText: 'एषः मम गृहकार्यः।',
             choiceTranslation: 'This is my homework.',
             choiceAudioPath: '/audio/level1/c2a1.mp3',
+            isCorrect: true,
             nextNodeId: 'END',
           },
           {
@@ -95,6 +100,7 @@ export const LEVELS: Level[] = [
             choiceText: 'क्षमताम्, अहं पुस्तकं विस्मृतम्।',
             choiceTranslation: 'Sorry, I forgot the book.',
             choiceAudioPath: '/audio/level1/c2a2.mp3',
+            isCorrect: false,
             nextNodeId: 'END',
           },
         ],
@@ -102,8 +108,8 @@ export const LEVELS: Level[] = [
       c2b: {
         id: 'c2b',
         speaker: 'Teacher',
-        npcText: 'चिन्तां मा करोतु। अहं पुनः वदामि।',
-        npcTranslation: "Don't worry. I will explain again.",
+        npcText: 'प्रथमं गृहकार्यं समापयतु।',
+        npcTranslation: 'First, finish your homework.',
         npcAudioPath: '/audio/level1/c2b_npc.mp3',
         backgroundGradient: BG.classroom,
         npcSprite: 'teacher',
@@ -111,16 +117,18 @@ export const LEVELS: Level[] = [
         choices: [
           {
             id: 'c2b1',
-            choiceText: 'धन्यवादः, गुरुवर्य।',
-            choiceTranslation: 'Thank you, respected teacher.',
+            choiceText: 'न, अहं पुनः क्रीडिष्यामि।',
+            choiceTranslation: 'No, I will play again.',
             choiceAudioPath: '/audio/level1/c2b1.mp3',
+            isCorrect: false,
             nextNodeId: 'END',
           },
           {
             id: 'c2b2',
-            choiceText: 'अहं ध्यानेन शृणोमि।',
-            choiceTranslation: 'I will listen carefully.',
+            choiceText: 'आम्, अधुना गृहकार्यं समाप्तं करिष्यामि।',
+            choiceTranslation: 'Yes, I will finish the homework now.',
             choiceAudioPath: '/audio/level1/c2b2.mp3',
+            isCorrect: true,
             nextNodeId: 'END',
           },
         ],
