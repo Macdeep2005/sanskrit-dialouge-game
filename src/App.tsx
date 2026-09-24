@@ -1,68 +1,150 @@
 import { useRef, useState } from 'react';
+
 import GameScene from './components/GameScene';
 import Icon from './components/Icon';
+
 import { LEVELS } from './data/gameData';
 
+import {
+  useAuth,
+} from './hooks/useAuth';
+
+import {
+  useLeaderboard,
+} from './hooks/useLeaderboard';
+
 export default function App() {
-  const [showHome, setShowHome] = useState(true);
+  const [
+    currentLevel,
+    setCurrentLevel,
+  ] = useState(0);
 
-  const [currentLevel, setCurrentLevel] =
-    useState(0);
+  const [
+    playerName,
+    setPlayerName,
+  ] = useState('');
 
-  const [playerName, setPlayerName] =
-    useState('');
+  const [
+    points,
+    setPoints,
+  ] = useState(0);
 
-  const [points, setPoints] =
-    useState(0);
-
-  const [stars, setStars] =
-    useState(0);
+  const [
+    stars,
+    setStars,
+  ] = useState(0);
 
   const [
     completedLevels,
     setCompletedLevels,
   ] = useState<number[]>([]);
 
-  const [settingsOpen, setSettingsOpen] =
-    useState(false);
+  const [
+    settingsOpen,
+    setSettingsOpen,
+  ] = useState(false);
 
   const awardedLevels =
     useRef(new Set<number>());
 
-  function awardLevel(levelNumber: number) {
-    if (
-      awardedLevels.current.has(levelNumber)
-    ) {
-      return;
-    }
+  const {
+    user,
+    authLoading,
+    signingIn,
+    signInForTesting,
+  } = useAuth();
 
-    awardedLevels.current.add(levelNumber);
+  const {
+    leaderboardMessage,
+    submittingScore,
+    submitLeaderboardScore,
+  } = useLeaderboard(
+    user,
+    points
+  );
 
-    setPoints(value => value + 50);
-    setStars(value => value + 3);
-
-    setCompletedLevels(current =>
-      current.includes(levelNumber)
-        ? current
-        : [...current, levelNumber]
-    );
+async function awardLevel(
+  levelNumber: number
+) {
+  if (
+    awardedLevels.current.has(
+      levelNumber
+    )
+  ) {
+    return;
   }
 
+  awardedLevels.current.add(
+    levelNumber
+  );
+
+  const pointsEarned = 50;
+
+  const newTotalPoints =
+    points + pointsEarned;
+
+  setPoints(
+    newTotalPoints
+  );
+
+  setStars(
+    value => value + 3
+  );
+
+  setCompletedLevels(
+    current =>
+      current.includes(
+        levelNumber
+      )
+        ? current
+        : [
+            ...current,
+            levelNumber,
+          ]
+  );
+
+  const isFinalLevel =
+    levelNumber ===
+    LEVELS[
+      LEVELS.length - 1
+    ].id;
+
+  if (
+    isFinalLevel &&
+    user
+  ) {
+    try {
+      await submitLeaderboardScore(
+        newTotalPoints
+      );
+    } catch (error) {
+      console.error(
+        'Could not submit final score:',
+        error
+      );
+    }
+  }
+}
+
   function deductPointsForWrongAnswer() {
-    setPoints(value =>
-      Math.max(0, value - 10)
+    setPoints(
+      value =>
+        Math.max(
+          0,
+          value - 10
+        )
     );
   }
 
   function goToNextLevel() {
-    setCurrentLevel(current =>
-      Math.min(
-        current + 1,
-        LEVELS.length - 1
-      )
+    setCurrentLevel(
+      current =>
+        Math.min(
+          current + 1,
+          LEVELS.length - 1
+        )
     );
   }
-
 
   return (
     <div className="portal-game-shell">
@@ -91,7 +173,9 @@ export default function App() {
 
           {playerName && (
             <div className="portal-stat">
-              <strong>{playerName}</strong>
+              <strong>
+                {playerName}
+              </strong>
             </div>
           )}
 
@@ -101,9 +185,13 @@ export default function App() {
               size={18}
             />
 
-            <strong>{points}</strong>
+            <strong>
+              {points}
+            </strong>
 
-            <span>Points</span>
+            <span>
+              Points
+            </span>
           </div>
 
           <div className="portal-stat">
@@ -112,9 +200,13 @@ export default function App() {
               size={18}
             />
 
-            <strong>{stars}</strong>
+            <strong>
+              {stars}
+            </strong>
 
-            <span>Stars</span>
+            <span>
+              Stars
+            </span>
           </div>
 
           <button
@@ -143,7 +235,9 @@ export default function App() {
           <div className="level-sidebar-header">
 
             <div>
-              <span>LEVELS</span>
+              <span>
+                LEVELS
+              </span>
 
               <strong>
                 Select a scenario
@@ -160,10 +254,13 @@ export default function App() {
           <div className="level-sidebar-scroll">
 
             {LEVELS.map(
-              (level, index) => {
-
+              (
+                level,
+                index
+              ) => {
                 const active =
-                  index === currentLevel;
+                  index ===
+                  currentLevel;
 
                 const complete =
                   completedLevels.includes(
@@ -172,7 +269,9 @@ export default function App() {
 
                 return (
                   <button
-                    key={level.id}
+                    key={
+                      level.id
+                    }
                     className={
                       `level-sidebar-card${
                         active
@@ -181,28 +280,36 @@ export default function App() {
                       }`
                     }
                     onClick={() =>
-                      setCurrentLevel(index)
+                      setCurrentLevel(
+                        index
+                      )
                     }
                   >
 
-                   <div
+                    <div
                       className="level-sidebar-thumb"
                       style={{
-                        backgroundImage: `url(${level.thumbnailImage})`,
+                        backgroundImage:
+                          `url(${level.thumbnailImage})`,
                       }}
                     >
 
                       <span className="level-sidebar-number">
                         {String(
                           level.id
-                        ).padStart(2, '0')}
+                        ).padStart(
+                          2,
+                          '0'
+                        )}
                       </span>
 
                       {complete && (
                         <span className="level-sidebar-complete">
                           <Icon
                             name="check"
-                            size={15}
+                            size={
+                              15
+                            }
                           />
                         </span>
                       )}
@@ -212,7 +319,9 @@ export default function App() {
                     <div className="level-sidebar-copy">
 
                       <small>
-                        {level.title}
+                        {
+                          level.title
+                        }
                       </small>
 
                       <strong>
@@ -245,14 +354,24 @@ export default function App() {
         <main className="portal-game-main">
 
           <GameScene
-            key={currentLevel}
-            levelIndex={currentLevel}
-            userName={playerName}
+            key={
+              currentLevel
+            }
+            levelIndex={
+              currentLevel
+            }
+            userName={
+              playerName
+            }
             onNameChange={
               setPlayerName
             }
-            points={points}
-            stars={stars}
+            points={
+              points
+            }
+            stars={
+              stars
+            }
             onLevelComplete={
               awardLevel
             }
@@ -262,14 +381,14 @@ export default function App() {
             onNextLevel={
               goToNextLevel
             }
-            onExit={() =>
-              setShowHome(true)
-            }
+            onExit={() => {}}
             externalSettingsOpen={
               settingsOpen
             }
             onExternalSettingsClose={() =>
-              setSettingsOpen(false)
+              setSettingsOpen(
+                false
+              )
             }
           />
 
