@@ -5,7 +5,7 @@ import type {
 } from '../types/gameTypes';
 
 export const LEVELS =
-  levelsData as Level[];
+  levelsData as unknown as Level[];
 
 export type {
   Choice,
