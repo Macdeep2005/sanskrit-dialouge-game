@@ -1,7 +1,11 @@
-import { initializeApp } from 'firebase/app';
+import {
+  initializeApp,
+} from 'firebase/app';
 
 import {
   getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
   onAuthStateChanged,
 } from 'firebase/auth';
 
@@ -42,9 +46,19 @@ const auth =
 const db =
   getFirestore(app);
 
+const provider =
+  new GoogleAuthProvider();
+
+provider.setCustomParameters({
+  prompt: 'select_account',
+});
+
 export {
   auth,
   db,
+  provider,
+
+  signInWithPopup,
   onAuthStateChanged,
 
   doc,

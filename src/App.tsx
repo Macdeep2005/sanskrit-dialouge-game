@@ -47,7 +47,12 @@ export default function App() {
   const awardedLevels =
     useRef(new Set<number>());
 
-  const { user } = useAuth();
+const {
+  user,
+  authLoading,
+  signingIn,
+  signInForTesting,
+} = useAuth();
 
   const {
     leaderboardMessage,
@@ -171,6 +176,29 @@ async function awardLevel(
         </div>
 
         <div className="portal-user-area">
+          {authLoading ? (
+  <div className="portal-stat">
+    <strong>Checking user...</strong>
+  </div>
+) : user ? (
+  <div className="portal-stat">
+    <strong>
+      {user.displayName ||
+        user.email ||
+        'Signed in'}
+    </strong>
+  </div>
+) : (
+  <button
+    className="button button-teal"
+    onClick={signInForTesting}
+    disabled={signingIn}
+  >
+    {signingIn
+      ? 'Signing in...'
+      : 'Test Zat.am Login'}
+  </button>
+)}
 
           {playerName && (
             <div className="portal-stat">
