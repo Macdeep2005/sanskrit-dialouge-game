@@ -1,5 +1,6 @@
 import {
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -19,6 +20,35 @@ import {
 } from '../utils/transliterateName';
 
 import '../styles/game.css';
+
+function shuffleChoices(
+  choices: Choice[]
+) {
+  const shuffledChoices =
+    [...choices];
+
+  for (
+    let index =
+      shuffledChoices.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() *
+      (index + 1)
+    );
+
+    [
+      shuffledChoices[index],
+      shuffledChoices[randomIndex],
+    ] = [
+      shuffledChoices[randomIndex],
+      shuffledChoices[index],
+    ];
+  }
+
+  return shuffledChoices;
+}
 
 interface GameSceneProps {
   levelIndex: number;
@@ -40,6 +70,9 @@ interface GameSceneProps {
 
   onWrongAnswer: () => void;
 
+  onHintUsed:
+    (cost: number) => void;
+
   externalSettingsOpen?: boolean;
 
   onExternalSettingsClose?: () => void;
@@ -55,6 +88,7 @@ export default function GameScene({
   onExit,
   onLevelComplete,
   onWrongAnswer,
+  onHintUsed,
   externalSettingsOpen = false,
   onExternalSettingsClose,
 }: GameSceneProps) {
@@ -115,6 +149,21 @@ export default function GameScene({
   >(null);
 
   const [
+    choiceShuffleVersion,
+    setChoiceShuffleVersion,
+  ] = useState(0);
+
+  const [
+    englishHintShown,
+    setEnglishHintShown,
+  ] = useState(false);
+
+  const [
+    answerHintShown,
+    setAnswerHintShown,
+  ] = useState(false);
+
+  const [
     mistakes,
     setMistakes,
   ] = useState<string[]>([]);
@@ -152,6 +201,17 @@ export default function GameScene({
         choice.isCorrect
     );
 
+  const displayedChoices = useMemo(
+    () => shuffleChoices(
+      node.choices
+    ),
+    [
+      level.id,
+      currentNodeId,
+      choiceShuffleVersion,
+    ]
+  );
+
   const sceneClass =
     `game-scene game-level-${level.id}${
       textSize === 1
@@ -177,6 +237,11 @@ export default function GameScene({
     stopAudio();
 
   }, [levelIndex]);
+
+  useEffect(() => {
+    setEnglishHintShown(false);
+    setAnswerHintShown(false);
+  }, [currentNodeId, levelIndex]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -440,6 +505,28 @@ export default function GameScene({
 
   function handleRetry() {
     setWrongChoice(null);
+
+    setChoiceShuffleVersion(
+      current => current + 1
+    );
+  }
+
+  function showEnglishHint() {
+    if (englishHintShown) {
+      return;
+    }
+
+    onHintUsed(5);
+    setEnglishHintShown(true);
+  }
+
+  function showAnswerHint() {
+    if (answerHintShown || !correctChoice) {
+      return;
+    }
+
+    onHintUsed(10);
+    setAnswerHintShown(true);
   }
 
   function handleRecovery() {
@@ -494,6 +581,9 @@ export default function GameScene({
     setShowReviewPopup(
       false
     );
+
+    setEnglishHintShown(false);
+    setAnswerHintShown(false);
   }
 
   function handleNext() {
@@ -640,11 +730,13 @@ export default function GameScene({
                 )}
               </p>
 
-              <p className="dialogue-english">
-                {fillVariables(
-                  node.npcTranslation
-                )}
-              </p>
+              {englishHintShown && (
+                <p className="dialogue-english">
+                  {fillVariables(
+                    node.npcTranslation
+                  )}
+                </p>
+              )}
 
             </div>
 
@@ -688,6 +780,59 @@ export default function GameScene({
             ? 'Try again'
             : 'Choose your response'}
         </div>
+
+        {!node.requiresNameInput &&
+          !wrongChoice && (
+          <div
+            className="hint-controls"
+            aria-label="Hints"
+          >
+            <span>
+              <Icon
+                name="book"
+                size={17}
+              />
+              Hints
+            </span>
+
+            <button
+              onClick={showEnglishHint}
+              disabled={englishHintShown}
+            >
+              {englishHintShown
+                ? 'English shown'
+                : 'Show English −5'}
+            </button>
+
+            {correctChoice && (
+              <button
+                onClick={showAnswerHint}
+                disabled={answerHintShown}
+              >
+                {answerHintShown
+                  ? 'Answer shown'
+                  : 'Show answer −10'}
+              </button>
+            )}
+          </div>
+        )}
+
+        {answerHintShown &&
+          correctChoice && (
+          <aside className="answer-hint">
+            <span>Correct response</span>
+            <strong>
+              {fillVariables(
+                correctChoice.choiceText
+              )}
+            </strong>
+            <small>
+              {fillVariables(
+                correctChoice.choiceTranslation
+              )}
+            </small>
+          </aside>
+        )}
 
         {node.requiresNameInput ? (
 
@@ -862,7 +1007,7 @@ export default function GameScene({
 
           <div className="choice-grid">
 
-            {node.choices.map(
+            {displayedChoices.map(
               (choice, index) => (
 
                 <article
@@ -897,11 +1042,13 @@ export default function GameScene({
                         )}
                       </strong>
 
-                      <small>
-                        {fillVariables(
-                          choice.choiceTranslation
-                        )}
-                      </small>
+                      {englishHintShown && (
+                        <small>
+                          {fillVariables(
+                            choice.choiceTranslation
+                          )}
+                        </small>
+                      )}
 
                     </span>
 
