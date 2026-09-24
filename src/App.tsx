@@ -185,10 +185,11 @@ export default function App() {
                     }
                   >
 
-                    <div
-                      className={
-                        `level-sidebar-thumb level-thumb-${level.id}`
-                      }
+                   <div
+                      className="level-sidebar-thumb"
+                      style={{
+                        backgroundImage: `url(${level.thumbnailImage})`,
+                      }}
                     >
 
                       <span className="level-sidebar-number">

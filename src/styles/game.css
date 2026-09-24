@@ -27,9 +27,61 @@
 .text-size-buttons button.active { color: var(--white); background: var(--teal-dark); border-color: var(--teal-dark); }
 .settings-tip { margin: 20px 0; padding: 13px; border-radius: 12px; color: var(--slate); background: var(--cream); line-height: 1.45; font-size: .87rem; }
 .settings-exit { width: 100%; min-height: 46px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #fed7aa; border-radius: 12px; color: var(--brown); background: #fff7ed; font-weight: 800; }
+/* =========================
+   CHARACTERS
+   ========================= */
 
-.character-stage { position: absolute; inset: 0; z-index: 8; display: flex; align-items: flex-end; justify-content: space-between; padding: 102px clamp(20px, 4vw, 74px) 215px; pointer-events: none; }
-.character-slot { width: clamp(320px, 34vw, 560px); height: clamp(510px, 72vh, 760px); animation: characterEnter .35s ease-out; }
+.character-stage {
+  position: absolute;
+  inset: 0;
+
+  z-index: 8;
+
+  pointer-events: none;
+}
+
+.character-slot {
+  position: absolute;
+
+  bottom: 190px;
+
+  width: clamp(280px, 28vw, 460px);
+  height: clamp(430px, 62vh, 650px);
+
+  animation: characterEnter 0.35s ease-out;
+}
+
+.character-player {
+  left: clamp(20px, 4vw, 70px);
+}
+
+.character-npc {
+  right: clamp(20px, 4vw, 70px);
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+  object-position: bottom center;
+
+  user-select: none;
+
+  transform-origin: center bottom;
+
+  filter:
+    drop-shadow(
+      0 18px 16px
+      rgba(30, 41, 59, 0.30)
+    );
+}
+
+.character-image-flipped {
+  transform: scaleX(-1);
+}
 .character-image { width: 100%; height: 100%; object-fit: contain; user-select: none; transform-origin: center bottom; filter: drop-shadow(0 18px 16px rgba(30,41,59,.30)); }
 .character-image-flipped { transform: scaleX(-1); }
 
@@ -134,7 +186,6 @@
   .choice-area { left: 10px; right: 10px; bottom: 10px; }
 }
 
-/* ===== Portal embedded game overrides ===== */
 
 .portal-game-main .game-scene {
   height: 100%;
@@ -222,16 +273,32 @@
 }
 @media (max-width: 700px) {
 
-  .portal-game-main .game-scene {
+  .character-stage {
+    position: absolute;
+    inset: 0;
+  }
+
+  .character-slot {
+    bottom: 210px;
+
+    width: 48%;
+    height: 340px;
+  }
+
+  .character-player {
+    left: 0;
+  }
+
+  .character-npc {
+    right: 0;
+  }
+
+  .character-image {
     width: 100%;
+    height: 100%;
 
-    height: 720px;
-    min-height: 720px;
-
-    position: relative;
-
-    background-size: cover;
-    background-position: center;
+    object-fit: contain;
+    object-position: bottom center;
   }
 
 
@@ -598,5 +665,21 @@
 
   .name-entry-box button {
     width: 100%;
+  }
+}
+@media (max-width: 1000px) {
+  .character-slot {
+    bottom: 210px;
+
+    width: clamp(250px, 34vw, 390px);
+    height: clamp(390px, 55vh, 560px);
+  }
+
+  .character-player {
+    left: 10px;
+  }
+
+  .character-npc {
+    right: 10px;
   }
 }

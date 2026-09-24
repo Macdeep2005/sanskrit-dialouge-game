@@ -1,0 +1,631 @@
+[
+  {
+    "id": 1,
+    "title": "Level 1",
+    "subtitle": "Introductions",
+    "icon": "classroom",
+    "accentColor": "#2dd4bf",
+    "thumbnailImage": "/backgrounds/classroom.png",
+    "startNodeId": "i1",
+
+    "nodes": {
+      "i1": {
+        "id": "i1",
+
+        "speaker": "Guide",
+
+        "npcText": "Hi! For our first level, let's get to know you.",
+        "npcTranslation": "What is your name?",
+
+        "npcAudioPath": "/audio/intro/i1_npc.mp3",
+
+        "backgroundImage": "/backgrounds/classroom.png",
+
+        "npcSprite": "/characters/teacher.png",
+        "playerSprite": "/characters/student.png",
+
+        "requiresNameInput": true,
+
+        "hint": {
+          "enabled": true,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": []
+      },
+
+      "i2": {
+        "id": "i2",
+
+        "speaker": "Guide",
+
+        "npcText": "Hello, {name}! Your name in Sanskrit can be written as {sanskritName}.",
+        "npcTranslation": "Now, how would you introduce yourself?",
+
+        "npcAudioPath": "/audio/intro/i2_npc.mp3",
+
+        "backgroundImage": "/backgrounds/classroom.png",
+
+        "npcSprite": "/characters/teacher.png",
+        "playerSprite": "/characters/student.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "i2a",
+
+            "choiceText": "मम नाम {sanskritName} अस्ति।",
+            "choiceTranslation": "My name is {name}.",
+
+            "choiceAudioPath": "/audio/intro/i2a.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "i2b",
+
+            "choiceText": "अहं नाम {sanskritName} गच्छामि।",
+            "choiceTranslation": "I name {name} go.",
+
+            "choiceAudioPath": "/audio/intro/i2b.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "For a self-introduction, use “मम नाम ... अस्ति” to say “My name is ...”",
+
+            "nextNodeId": "END"
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "id": 2,
+    "title": "Level 2",
+    "subtitle": "The Classroom",
+    "icon": "classroom",
+    "accentColor": "#38bdf8",
+    "thumbnailImage": "/backgrounds/classroom.png",
+    "startNodeId": "c1",
+
+    "nodes": {
+      "c1": {
+        "id": "c1",
+
+        "speaker": "Teacher",
+
+        "npcText": "अद्य भवतः गृहकार्यं समाप्तम् किम्?",
+        "npcTranslation": "Is your homework done today?",
+
+        "npcAudioPath": "/audio/level1/c1_npc.mp3",
+
+        "backgroundImage": "/backgrounds/classroom.png",
+
+        "npcSprite": "/characters/teacher.png",
+        "playerSprite": "/characters/student.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "c1a",
+
+            "choiceText": "आम्, सर्वम् समाप्तम्।",
+            "choiceTranslation": "Yes, all is finished.",
+
+            "choiceAudioPath": "/audio/level1/c1a.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "c2a"
+          },
+
+          {
+            "id": "c1b",
+
+            "choiceText": "क्षम्यताम्, अहं क्रीडितुं इच्छामि।",
+            "choiceTranslation": "Sorry, I want to play.",
+
+            "choiceAudioPath": "/audio/level1/c1b.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "The teacher asked about your homework, not playtime.",
+
+            "nextNodeId": "c2b"
+          }
+        ]
+      },
+
+      "c2a": {
+        "id": "c2a",
+
+        "speaker": "Teacher",
+
+        "npcText": "उत्तमम्! अधुना पाठं दर्शयतु।",
+        "npcTranslation": "Excellent! Now show me the lesson.",
+
+        "npcAudioPath": "/audio/level1/c2a_npc.mp3",
+
+        "backgroundImage": "/backgrounds/classroom.png",
+
+        "npcSprite": "/characters/teacher.png",
+        "playerSprite": "/characters/student.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "c2a1",
+
+            "choiceText": "एषः मम गृहकार्यः।",
+            "choiceTranslation": "This is my homework.",
+
+            "choiceAudioPath": "/audio/level1/c2a1.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "c2a2",
+
+            "choiceText": "क्षमताम्, अहं पुस्तकं विस्मृतम्।",
+            "choiceTranslation": "Sorry, I forgot the book.",
+
+            "choiceAudioPath": "/audio/level1/c2a2.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "The teacher asked to see your homework, so you need to show it.",
+
+            "nextNodeId": "END"
+          }
+        ]
+      },
+
+      "c2b": {
+        "id": "c2b",
+
+        "speaker": "Teacher",
+
+        "npcText": "प्रथमं गृहकार्यं समापयतु।",
+        "npcTranslation": "First, finish your homework.",
+
+        "npcAudioPath": "/audio/level1/c2b_npc.mp3",
+
+        "backgroundImage": "/backgrounds/classroom.png",
+
+        "npcSprite": "/characters/teacher.png",
+        "playerSprite": "/characters/student.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "c2b1",
+
+            "choiceText": "न, अहं पुनः क्रीडिष्यामि।",
+            "choiceTranslation": "No, I will play again.",
+
+            "choiceAudioPath": "/audio/level1/c2b1.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "The teacher asked you to finish your homework before playing.",
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "c2b2",
+
+            "choiceText": "आम्, अधुना गृहकार्यं समाप्तं करिष्यामि।",
+            "choiceTranslation": "Yes, I will finish the homework now.",
+
+            "choiceAudioPath": "/audio/level1/c2b2.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "id": 3,
+    "title": "Level 3",
+    "subtitle": "The Playground",
+    "icon": "playground",
+    "accentColor": "#34d399",
+    "thumbnailImage": "/backgrounds/playground.png",
+    "startNodeId": "p1",
+
+    "nodes": {
+      "p1": {
+        "id": "p1",
+
+        "speaker": "Friend",
+
+        "npcText": "अद्य सायङ्काले खेलनाथं आगच्छसि किम्?",
+        "npcTranslation": "Are you coming to play this evening?",
+
+        "npcAudioPath": "/audio/level2/p1_npc.mp3",
+
+        "backgroundImage": "/backgrounds/playground.png",
+
+        "npcSprite": "/characters/friend.png",
+        "playerSprite": "/characters/player.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "p1a",
+
+            "choiceText": "आम्, अहं कन्दुकम् आनयामि।",
+            "choiceTranslation": "Yes, I am bringing a ball.",
+
+            "choiceAudioPath": "/audio/level2/p1a.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "p2a"
+          },
+
+          {
+            "id": "p1b",
+
+            "choiceText": "क्षम्यताम्, अहं श्वः आगमिष्यामि।",
+            "choiceTranslation": "Sorry, I will come tomorrow.",
+
+            "choiceAudioPath": "/audio/level2/p1b.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "Your friend invited you this evening, but this reply moves the plan to tomorrow.",
+
+            "nextNodeId": "p2b"
+          }
+        ]
+      },
+
+      "p2a": {
+        "id": "p2a",
+
+        "speaker": "Friend",
+
+        "npcText": "अस्तु! क्रीडाङ्गणम् आगच्छतु। अन्ये अपि आगच्छन्ति।",
+        "npcTranslation": "Great! Come to the field. Others are coming too.",
+
+        "npcAudioPath": "/audio/level2/p2a_npc.mp3",
+
+        "backgroundImage": "/backgrounds/playground.png",
+
+        "npcSprite": "/characters/friend.png",
+        "playerSprite": "/characters/player.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "p2a1",
+
+            "choiceText": "मम मित्रम् अपि आनयामि।",
+            "choiceTranslation": "I will bring my friend too.",
+
+            "choiceAudioPath": "/audio/level2/p2a1.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "p2a2",
+
+            "choiceText": "अहं विद्यालयं गमिष्यामि।",
+            "choiceTranslation": "I will go to school.",
+
+            "choiceAudioPath": "/audio/level2/p2a2.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "Your friend asked about meeting at the field, so respond to the plan instead of changing the topic.",
+
+            "nextNodeId": "END"
+          }
+        ]
+      },
+
+      "p2b": {
+        "id": "p2b",
+
+        "speaker": "Friend",
+
+        "npcText": "अस्तु, श्वः मेलावः।",
+        "npcTranslation": "Okay, let's meet tomorrow.",
+
+        "npcAudioPath": "/audio/level2/p2b_npc.mp3",
+
+        "backgroundImage": "/backgrounds/playground.png",
+
+        "npcSprite": "/characters/friend.png",
+        "playerSprite": "/characters/player.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "p2b1",
+
+            "choiceText": "आम्, श्वः निश्चितम् आगच्छामि।",
+            "choiceTranslation": "Yes, I will definitely come tomorrow.",
+
+            "choiceAudioPath": "/audio/level2/p2b1.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "p2b2",
+
+            "choiceText": "अहं अद्य क्रीडितुम् इच्छामि।",
+            "choiceTranslation": "I want to play today.",
+
+            "choiceAudioPath": "/audio/level2/p2b2.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "You agreed to meet tomorrow, so confirm that plan rather than return to playing today.",
+
+            "nextNodeId": "END"
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "id": 4,
+    "title": "Level 4",
+    "subtitle": "The Fruit Market",
+    "icon": "market",
+    "accentColor": "#fb923c",
+    "thumbnailImage": "/backgrounds/fruit-market.png",
+    "startNodeId": "f1",
+
+    "nodes": {
+      "f1": {
+        "id": "f1",
+
+        "speaker": "Vendor",
+
+        "npcText": "नमस्ते! अद्य भवान् किं इच्छति?",
+        "npcTranslation": "Hello! What would you like today?",
+
+        "npcAudioPath": "/audio/level3/f1_npc.mp3",
+
+        "backgroundImage": "/backgrounds/fruit-market.png",
+
+        "npcSprite": "/characters/vendor.png",
+        "playerSprite": "/characters/customer.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "f1a",
+
+            "choiceText": "एकं किलोग्रामम् आम्रं यच्छतु।",
+            "choiceTranslation": "Give me 1 kg mangoes.",
+
+            "choiceAudioPath": "/audio/level3/f1a.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "f2a"
+          },
+
+          {
+            "id": "f1b",
+
+            "choiceText": "आम्रस्य मूल्यं किम्?",
+            "choiceTranslation": "What is the price of mangoes?",
+
+            "choiceAudioPath": "/audio/level3/f1b.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "Asking the price is useful, but the vendor first asked what you would like.",
+
+            "nextNodeId": "f2b"
+          }
+        ]
+      },
+
+      "f2a": {
+        "id": "f2a",
+
+        "speaker": "Vendor",
+
+        "npcText": "अस्तु, एकं किलोग्रामस्य मूल्यं अशीतिः रूप्यकाणि। किमपि अन्यत्?",
+        "npcTranslation": "Okay, that will be 80 rupees. Anything else?",
+
+        "npcAudioPath": "/audio/level3/f2a_npc.mp3",
+
+        "backgroundImage": "/backgrounds/fruit-market.png",
+
+        "npcSprite": "/characters/vendor.png",
+        "playerSprite": "/characters/customer.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "f2a1",
+
+            "choiceText": "आम्, सेवफलानि अपि योजयतु।",
+            "choiceTranslation": "Yes, also add apples.",
+
+            "choiceAudioPath": "/audio/level3/f2a1.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "END"
+          },
+
+          {
+            "id": "f2a2",
+
+            "choiceText": "अहं क्रीडाङ्गणं गच्छामि।",
+            "choiceTranslation": "I am going to the playground.",
+
+            "choiceAudioPath": "/audio/level3/f2a2.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "The vendor asked whether you want anything else.",
+
+            "nextNodeId": "END"
+          }
+        ]
+      },
+
+      "f2b": {
+        "id": "f2b",
+
+        "speaker": "Vendor",
+
+        "npcText": "एकं किलोग्रामस्य मूल्यं शतं रूप्यकाणि। बद्धं करोमि किम्?",
+        "npcTranslation": "It is 100 rupees per kg. Should I pack it?",
+
+        "npcAudioPath": "/audio/level3/f2b_npc.mp3",
+
+        "backgroundImage": "/backgrounds/fruit-market.png",
+
+        "npcSprite": "/characters/vendor.png",
+        "playerSprite": "/characters/customer.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": [
+          {
+            "id": "f2b1",
+
+            "choiceText": "आम्, एकं किलोग्रामं बध्नातु।",
+            "choiceTranslation": "Yes, pack 1 kg.",
+
+            "choiceAudioPath": "/audio/level3/f2b1.mp3",
+
+            "isCorrect": true,
+
+            "nextNodeId": "f3"
+          },
+
+          {
+            "id": "f2b2",
+
+            "choiceText": "अहं शतं रूप्यकाणि ददामि।",
+            "choiceTranslation": "I will give 100 rupees.",
+
+            "choiceAudioPath": "/audio/level3/f2b2.mp3",
+
+            "isCorrect": false,
+
+            "feedback": "The vendor asked whether to pack the mangoes first.",
+
+            "nextNodeId": "f3"
+          }
+        ]
+      },
+
+      "f3": {
+        "id": "f3",
+
+        "speaker": "Vendor",
+
+        "npcText": "इदम्। धन्यवादः!",
+        "npcTranslation": "Here you go. Thank you!",
+
+        "npcAudioPath": "/audio/level3/f3_npc.mp3",
+
+        "backgroundImage": "/backgrounds/fruit-market.png",
+
+        "npcSprite": "/characters/vendor.png",
+        "playerSprite": "/characters/customer.png",
+
+        "hint": {
+          "enabled": false,
+          "type": "placeholder",
+          "text": "",
+          "cost": 0
+        },
+
+        "choices": []
+      }
+    }
+  }
+]

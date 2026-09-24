@@ -370,17 +370,6 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--teal); outl
     );
 }
 
-.level-thumb-1 {
-  background-image: url('/backgrounds/classroom.png');
-}
-
-.level-thumb-2 {
-  background-image: url('/backgrounds/playground.png');
-}
-
-.level-thumb-3 {
-  background-image: url('/backgrounds/fruit-market.png');
-}
 
 .level-sidebar-number,
 .level-sidebar-complete {

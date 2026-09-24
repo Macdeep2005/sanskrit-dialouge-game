@@ -510,6 +510,16 @@ export default function GameScene({
   return (
     <section
       className={sceneClass}
+      style={{
+        backgroundImage:
+          `linear-gradient(
+            to bottom,
+            rgba(10,5,30,0.05),
+            rgba(10,5,30,0.15) 55%,
+            rgba(10,5,30,0.72)
+          ),
+          url('${node.backgroundImage}')`,
+      }}
     >
 
       <div className="game-shade" />
@@ -590,24 +600,22 @@ export default function GameScene({
         </aside>
       )}
 
-      <div className="character-stage">
-
-        <div className="character-slot character-player">
-          <CharacterSprite
-            type={
-              node.playerSprite
-            }
-          />
-        </div>
-
-        <div className="character-slot character-npc">
-          <CharacterSprite
-            type={node.npcSprite}
-            flipped
-          />
-        </div>
-
+      <div className="character-slot character-player">
+        <CharacterSprite
+          src={node.playerSprite}
+          alt="Player"
+        />
       </div>
+
+      <div className="character-slot character-npc">
+        <CharacterSprite
+          src={node.npcSprite}
+          alt={node.speaker}
+          flipped
+        />
+      </div>
+
+     
 
       <div
         className="npc-dialogue-wrap"
