@@ -126,14 +126,20 @@ async function awardLevel(
   }
 }
 
-  function deductPointsForWrongAnswer() {
+  function deductPoints(
+    amount: number
+  ) {
     setPoints(
       value =>
         Math.max(
           0,
-          value - 10
+          value - amount
         )
     );
+  }
+
+  function deductPointsForWrongAnswer() {
+    deductPoints(10);
   }
 
   function goToNextLevel() {
@@ -377,6 +383,9 @@ async function awardLevel(
             }
             onWrongAnswer={
               deductPointsForWrongAnswer
+            }
+            onHintUsed={
+              deductPoints
             }
             onNextLevel={
               goToNextLevel
