@@ -47,12 +47,7 @@ export default function App() {
   const awardedLevels =
     useRef(new Set<number>());
 
-  const {
-    user,
-    authLoading,
-    signingIn,
-    signInForTesting,
-  } = useAuth();
+  const { user } = useAuth();
 
   const {
     leaderboardMessage,

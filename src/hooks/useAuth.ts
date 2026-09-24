@@ -9,8 +9,6 @@ import type {
 
 import {
   auth,
-  provider,
-  signInWithPopup,
   onAuthStateChanged,
 } from '../firebase-config';
 
@@ -21,11 +19,6 @@ export function useAuth() {
   ] = useState<
     User | null | undefined
   >(undefined);
-
-  const [
-    signingIn,
-    setSigningIn,
-  ] = useState(false);
 
   useEffect(() => {
     const unsubscribe =
@@ -39,32 +32,7 @@ export function useAuth() {
     return unsubscribe;
   }, []);
 
-  async function signInForTesting() {
-    setSigningIn(true);
-
-    try {
-      await signInWithPopup(
-        auth,
-        provider
-      );
-    } catch (error) {
-      console.error(
-        'Firebase sign in failed:',
-        error
-      );
-    } finally {
-      setSigningIn(false);
-    }
-  }
-
   return {
     user,
-
-    authLoading:
-      user === undefined,
-
-    signingIn,
-
-    signInForTesting,
   };
 }
