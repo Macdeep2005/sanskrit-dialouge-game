@@ -366,3 +366,237 @@
     font-size: 0.78rem;
   }
 }
+.review-mode-badge {
+  position: absolute;
+  z-index: 40;
+
+  top: 18px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 8px 16px;
+
+  border-radius: 999px;
+
+  background: #d97706;
+  color: white;
+
+  font-weight: 800;
+  font-size: 0.78rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}/* =========================
+   REVIEW POPUP
+   ========================= */
+
+.review-popup-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(15, 23, 42, 0.68);
+
+  backdrop-filter: blur(4px);
+}
+
+.review-popup {
+  width: min(430px, 92%);
+
+  padding: 30px 28px;
+
+  text-align: center;
+
+  border-radius: 22px;
+
+  background: white;
+
+  color: #1e293b;
+
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.3);
+}
+
+.review-popup-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #ccfbf1;
+  color: #115e59;
+}
+
+.review-popup h2 {
+  margin: 0 0 10px;
+
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.review-popup p {
+  margin: 0 auto 22px;
+
+  max-width: 330px;
+
+  color: #64748b;
+
+  line-height: 1.55;
+}
+
+.review-popup .button {
+  margin: 0 auto;
+}
+
+
+@media (max-width: 700px) {
+
+  .review-popup {
+    width: 100%;
+
+    padding: 24px 18px;
+
+    border-radius: 18px;
+  }
+
+  .review-popup h2 {
+    font-size: 1.3rem;
+  }
+
+  .review-popup p {
+    font-size: 0.88rem;
+  }
+}/* =========================
+   NAME ENTRY
+   ========================= */
+
+.name-entry-box {
+  width: min(560px, 94%);
+  margin: 0 auto;
+
+  padding: 14px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 12px 30px
+    rgba(15, 23, 42, 0.24);
+}
+
+.name-entry-box input {
+  min-width: 0;
+
+  height: 50px;
+
+  padding: 0 15px;
+
+  border:
+    2px solid #cbd5e1;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  color: #1e293b;
+  background: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.name-entry-box input:focus {
+  border-color: #2dd4bf;
+}
+
+.name-entry-box button {
+  min-width: 140px;
+}
+
+.name-entry-box button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.name-entry-error {
+  grid-column: 1 / -1;
+
+  margin: 0;
+
+  padding: 4px 2px;
+
+  color: #b45309;
+
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+
+/* Intro level */
+
+.game-level-1 {
+  --level-accent: #115e59;
+
+  background-image:
+    url('/backgrounds/classroom.png');
+}
+
+
+/* Classroom is now level 2 */
+
+.game-level-2 {
+  --level-accent: var(--navy);
+
+  background-image:
+    url('/backgrounds/classroom.png');
+}
+
+
+/* Playground is now level 3 */
+
+.game-level-3 {
+  --level-accent: var(--teal-dark);
+
+  background-image:
+    url('/backgrounds/playground.png');
+}
+
+
+/* Fruit Market is now level 4 */
+
+.game-level-4 {
+  --level-accent: var(--brown);
+
+  background-image:
+    url('/backgrounds/fruit-market.png');
+}
+
+
+@media (max-width: 700px) {
+
+  .name-entry-box {
+    grid-template-columns: 1fr;
+  }
+
+  .name-entry-box button {
+    width: 100%;
+  }
+}
