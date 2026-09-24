@@ -1005,7 +1005,7 @@ export default function GameScene({
 
         ) : (
 
-          <div className="choice-grid">
+          <div className={`choice-grid choice-count-${displayedChoices.length}`}>
 
             {displayedChoices.map(
               (choice, index) => (

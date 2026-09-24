@@ -628,4 +628,499 @@
       }
     }
   }
+  ,
+{
+  "id": 5,
+  "title": "Level 5",
+  "subtitle": "At the Restaurant",
+  "icon": "restaurant",
+  "accentColor": "#f59e0b",
+  "thumbnailImage": "/backgrounds/restaurant.png",
+  "startNodeId": "r1",
+
+  "nodes": {
+    "r1": {
+      "id": "r1",
+      "speaker": "Waiter",
+
+      "npcText": "नमस्ते। भवान् किं खादितुम् इच्छति?",
+      "npcTranslation": "Hello. What would you like to eat?",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/restaurant.png",
+
+      "npcSprite": "/characters/waiter.png",
+      "playerSprite": "/characters/restaurant-customer.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "r1a",
+          "choiceText": "अहं शाकाहारी भोजनं इच्छामि।",
+          "choiceTranslation": "I would like a vegetarian meal.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "r2"
+        },
+        {
+          "id": "r1b",
+          "choiceText": "भोजनस्य मूल्यं कुत्र अस्ति?",
+          "choiceTranslation": "Where is the price of the food?",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The waiter asked what you would like to eat.",
+          "nextNodeId": "r2"
+        },
+        {
+          "id": "r1c",
+          "choiceText": "अहं विद्यालयं गच्छामि।",
+          "choiceTranslation": "I am going to school.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "Respond to the waiter about your food order.",
+          "nextNodeId": "r2"
+        }
+      ]
+    },
+
+    "r2": {
+      "id": "r2",
+      "speaker": "Waiter",
+
+      "npcText": "अस्तु। किं पातुम् इच्छति?",
+      "npcTranslation": "Alright. What would you like to drink?",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/restaurant.png",
+
+      "npcSprite": "/characters/waiter.png",
+      "playerSprite": "/characters/restaurant-customer.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "r2a",
+          "choiceText": "कृपया जलं यच्छतु।",
+          "choiceTranslation": "Please give me water.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "r3"
+        },
+        {
+          "id": "r2b",
+          "choiceText": "आम्, भोजनं स्वादिष्टम् अस्ति।",
+          "choiceTranslation": "Yes, the food is delicious.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The waiter asked what you would like to drink.",
+          "nextNodeId": "r3"
+        },
+        {
+          "id": "r2c",
+          "choiceText": "कृपया फलानि यच्छतु।",
+          "choiceTranslation": "Please give me fruits.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "Choose a drink in response to the waiter.",
+          "nextNodeId": "r3"
+        }
+      ]
+    },
+
+    "r3": {
+      "id": "r3",
+      "speaker": "Waiter",
+
+      "npcText": "भोजनं समाप्तम्। अन्यत् किमपि इच्छति?",
+      "npcTranslation": "You have finished your meal. Would you like anything else?",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/restaurant.png",
+
+      "npcSprite": "/characters/waiter.png",
+      "playerSprite": "/characters/restaurant-customer.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "r3a",
+          "choiceText": "न धन्यवादः। कृपया मूल्यपत्रं यच्छतु।",
+          "choiceTranslation": "No thank you. Please give me the bill.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "END"
+        },
+        {
+          "id": "r3b",
+          "choiceText": "आम्, अहं गृहं गच्छामि।",
+          "choiceTranslation": "Yes, I am going home.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "A restaurant conversation should end by responding about the order or bill.",
+          "nextNodeId": "END"
+        },
+        {
+          "id": "r3c",
+          "choiceText": "कृपया पुनः जलं यच्छतु।",
+          "choiceTranslation": "Please give me water again.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "This is possible, but asking for the bill best completes this conversation.",
+          "nextNodeId": "END"
+        }
+      ]
+    }
+  }
+},
+
+{
+  "id": 6,
+  "title": "Level 6",
+  "subtitle": "Asking for Directions",
+  "icon": "directions",
+  "accentColor": "#8b5cf6",
+  "thumbnailImage": "/backgrounds/directions-street.png",
+  "startNodeId": "d1",
+
+  "nodes": {
+    "d1": {
+      "id": "d1",
+      "speaker": "Local",
+
+      "npcText": "नमस्ते। भवान् कुत्र गन्तुम् इच्छति?",
+      "npcTranslation": "Hello. Where would you like to go?",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/directions-street.png",
+
+      "npcSprite": "/characters/local-person.png",
+      "playerSprite": "/characters/traveler.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "d1a",
+          "choiceText": "अहं रेलस्थानकं गन्तुम् इच्छामि।",
+          "choiceTranslation": "I would like to go to the railway station.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "d2"
+        },
+        {
+          "id": "d1b",
+          "choiceText": "रेलयानं कदा आगच्छति?",
+          "choiceTranslation": "When does the train arrive?",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "First tell the person where you want to go.",
+          "nextNodeId": "d2"
+        },
+        {
+          "id": "d1c",
+          "choiceText": "अहं भोजनं इच्छामि।",
+          "choiceTranslation": "I want food.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The question is asking about your destination.",
+          "nextNodeId": "d2"
+        }
+      ]
+    },
+
+    "d2": {
+      "id": "d2",
+      "speaker": "Local",
+
+      "npcText": "सीधं गच्छतु, ततः दक्षिणतः परिवर्तताम्।",
+      "npcTranslation": "Go straight, then turn right.",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/directions-street.png",
+
+      "npcSprite": "/characters/local-person.png",
+      "playerSprite": "/characters/traveler.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "d2a",
+          "choiceText": "सीधं गत्वा दक्षिणतः परिवर्ते, किम्?",
+          "choiceTranslation": "I go straight and then turn right, correct?",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "d3"
+        },
+        {
+          "id": "d2b",
+          "choiceText": "सीधं गत्वा वामतः परिवर्ते, किम्?",
+          "choiceTranslation": "I go straight and then turn left, correct?",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The direction given was right, not left.",
+          "nextNodeId": "d3"
+        },
+        {
+          "id": "d2c",
+          "choiceText": "अहं अत्र तिष्ठामि।",
+          "choiceTranslation": "I will stay here.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "Repeat the directions to confirm you understood them.",
+          "nextNodeId": "d3"
+        }
+      ]
+    },
+
+    "d3": {
+      "id": "d3",
+      "speaker": "Local",
+
+      "npcText": "आम्। ततः रेलस्थानकं भवतः वामभागे भविष्यति।",
+      "npcTranslation": "Yes. Then the railway station will be on your left.",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/directions-street.png",
+
+      "npcSprite": "/characters/local-person.png",
+      "playerSprite": "/characters/traveler.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "d3a",
+          "choiceText": "धन्यवादः। अधुना मार्गं जानामि।",
+          "choiceTranslation": "Thank you. Now I know the way.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "END"
+        },
+        {
+          "id": "d3b",
+          "choiceText": "न, अहं भोजनालयं गच्छामि।",
+          "choiceTranslation": "No, I am going to a restaurant.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "You were asking for directions to the railway station.",
+          "nextNodeId": "END"
+        },
+        {
+          "id": "d3c",
+          "choiceText": "रेलस्थानकं दक्षिणभागे अस्ति।",
+          "choiceTranslation": "The railway station is on the right.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The speaker said it will be on your left.",
+          "nextNodeId": "END"
+        }
+      ]
+    }
+  }
+},
+
+{
+  "id": 7,
+  "title": "Level 7",
+  "subtitle": "The Bus Station",
+  "icon": "travel",
+  "accentColor": "#ef4444",
+  "thumbnailImage": "/backgrounds/bus-station.png",
+  "startNodeId": "b1",
+
+  "nodes": {
+    "b1": {
+      "id": "b1",
+      "speaker": "Ticket Clerk",
+
+      "npcText": "नमस्ते। भवान् कुत्र गन्तुम् इच्छति?",
+      "npcTranslation": "Hello. Where would you like to travel?",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/bus-station.png",
+
+      "npcSprite": "/characters/ticket-clerk.png",
+      "playerSprite": "/characters/passenger.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "b1a",
+          "choiceText": "अहं दिल्लीं गन्तुम् इच्छामि।",
+          "choiceTranslation": "I would like to go to Delhi.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "b2"
+        },
+        {
+          "id": "b1b",
+          "choiceText": "बसयानं कदा आगच्छति?",
+          "choiceTranslation": "When does the bus arrive?",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "First tell the clerk your destination.",
+          "nextNodeId": "b2"
+        },
+        {
+          "id": "b1c",
+          "choiceText": "मम मित्रं दिल्लीं गच्छति।",
+          "choiceTranslation": "My friend is going to Delhi.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The clerk asked where you want to travel.",
+          "nextNodeId": "b2"
+        }
+      ]
+    },
+
+    "b2": {
+      "id": "b2",
+      "speaker": "Ticket Clerk",
+
+      "npcText": "दिल्लीगामिनी बस् सायं षड्वादने प्रस्थास्यति।",
+      "npcTranslation": "The bus to Delhi will leave at six in the evening.",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/bus-station.png",
+
+      "npcSprite": "/characters/ticket-clerk.png",
+      "playerSprite": "/characters/passenger.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "b2a",
+          "choiceText": "एकं यात्रापत्रं यच्छतु।",
+          "choiceTranslation": "Please give me one ticket.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "b3"
+        },
+        {
+          "id": "b2b",
+          "choiceText": "बस् प्रातः षड्वादने प्रस्थास्यति।",
+          "choiceTranslation": "The bus leaves at six in the morning.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The clerk said six in the evening.",
+          "nextNodeId": "b3"
+        },
+        {
+          "id": "b2c",
+          "choiceText": "अहं श्वः आगमिष्यामि।",
+          "choiceTranslation": "I will come tomorrow.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "You can continue by requesting a ticket for the announced bus.",
+          "nextNodeId": "b3"
+        }
+      ]
+    },
+
+    "b3": {
+      "id": "b3",
+      "speaker": "Ticket Clerk",
+
+      "npcText": "यात्रापत्रस्य मूल्यं पञ्चशतं रूप्यकाणि।",
+      "npcTranslation": "The ticket costs 500 rupees.",
+
+      "npcAudioPath": "",
+
+      "backgroundImage": "/backgrounds/bus-station.png",
+
+      "npcSprite": "/characters/ticket-clerk.png",
+      "playerSprite": "/characters/passenger.png",
+
+      "hint": {
+        "enabled": true,
+        "type": "translation",
+        "text": "",
+        "cost": 5
+      },
+
+      "choices": [
+        {
+          "id": "b3a",
+          "choiceText": "अस्तु। अहं पञ्चशतं रूप्यकाणि ददामि।",
+          "choiceTranslation": "Alright. I will pay 500 rupees.",
+          "choiceAudioPath": "",
+          "isCorrect": true,
+          "nextNodeId": "END"
+        },
+        {
+          "id": "b3b",
+          "choiceText": "अहं पञ्चाशतं रूप्यकाणि ददामि।",
+          "choiceTranslation": "I will pay 50 rupees.",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "The ticket costs 500 rupees, not 50.",
+          "nextNodeId": "END"
+        },
+        {
+          "id": "b3c",
+          "choiceText": "बसयानं कुत्र खादति?",
+          "choiceTranslation": "Where does the bus eat?",
+          "choiceAudioPath": "",
+          "isCorrect": false,
+          "feedback": "Respond to the ticket price.",
+          "nextNodeId": "END"
+        }
+      ]
+    }
+  }
+}
 ]

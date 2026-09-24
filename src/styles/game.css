@@ -450,6 +450,10 @@
     font-size: 0.78rem;
   }
 }
+.choice-count-3 .choice-card:last-child {
+  grid-column: 1 / -1;
+  width: 100%;
+}
 .review-mode-badge {
   position: absolute;
   z-index: 40;
