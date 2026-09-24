@@ -297,7 +297,7 @@ input:focus-visible {
   transition: transform .18s ease, border-color .18s ease, background .18s ease;
 }
 
-.level-sidebar-card:hover {
+.level-sidebar-card:not(.locked):hover {
   transform: translateY(-2px);
   border-color: rgba(45,212,191,.55);
 }
@@ -306,6 +306,19 @@ input:focus-visible {
   border-color: var(--teal);
   background: rgba(45,212,191,.12);
   box-shadow: inset 4px 0 0 var(--teal);
+}
+.level-sidebar-card.locked {
+  cursor: not-allowed;
+  opacity: 0.58;
+  filter: grayscale(0.45);
+}
+
+.level-sidebar-card.locked .level-sidebar-thumb {
+  filter: brightness(0.55);
+}
+
+.level-sidebar-card.locked .level-sidebar-copy {
+  opacity: 0.75;
 }
 
 .level-sidebar-thumb {
@@ -323,7 +336,8 @@ input:focus-visible {
 }
 
 .level-sidebar-number,
-.level-sidebar-complete {
+.level-sidebar-complete,
+.level-sidebar-lock {
   position: absolute;
   z-index: 2;
   top: 10px;
@@ -347,6 +361,30 @@ input:focus-visible {
   width: 32px;
   height: 32px;
   background: var(--teal-dark);
+}
+.level-sidebar-lock {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  color: var(--white);
+
+  background:
+    rgba(
+      30,
+      41,
+      59,
+      0.9
+    );
 }
 
 .level-sidebar-copy {

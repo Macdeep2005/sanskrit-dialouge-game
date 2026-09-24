@@ -296,23 +296,52 @@ async function awardLevel(
                     level.id
                   );
 
+                const unlocked =
+                  index === 0 ||
+                  completedLevels.includes(
+                    LEVELS[index - 1].id
+                  );
+
+                const locked =
+                  !unlocked;
+
                 return (
                   <button
-                    key={
-                      level.id
-                    }
+                    key={level.id}
+
                     className={
                       `level-sidebar-card${
                         active
                           ? ' active'
                           : ''
+                      }${
+                        locked
+                          ? ' locked'
+                          : ''
                       }`
                     }
-                    onClick={() =>
+
+                    disabled={locked}
+
+                    aria-disabled={
+                      locked
+                    }
+
+                    aria-label={
+                      locked
+                        ? `${level.title} ${level.subtitle} locked`
+                        : `${level.title} ${level.subtitle}`
+                    }
+
+                    onClick={() => {
+                      if (locked) {
+                        return;
+                      }
+
                       setCurrentLevel(
                         index
-                      )
-                    }
+                      );
+                    }}
                   >
 
                     <div
@@ -332,16 +361,25 @@ async function awardLevel(
                         )}
                       </span>
 
-                      {complete && (
+                      {complete ? (
+
                         <span className="level-sidebar-complete">
                           <Icon
                             name="check"
-                            size={
-                              15
-                            }
+                            size={15}
                           />
                         </span>
-                      )}
+
+                      ) : locked ? (
+
+                        <span className="level-sidebar-lock">
+                          <Icon
+                            name="lock"
+                            size={16}
+                          />
+                        </span>
+
+                      ) : null}
 
                     </div>
 
@@ -361,12 +399,12 @@ async function awardLevel(
                       </strong>
 
                       <span>
-                        {
-                          Object.keys(
-                            level.nodes
-                          ).length
-                        }{' '}
-                        dialogue nodes
+                        {locked
+                          ? 'Locked'
+                          : `${Object.keys(
+                              level.nodes
+                            ).length} dialogue nodes`
+                        }
                       </span>
 
                     </div>

@@ -2,7 +2,7 @@ interface IconProps {
   name:
     | 'play' | 'login' | 'userPlus' | 'settings' | 'volume' | 'close'
     | 'exit' | 'star' | 'points' | 'arrow' | 'replay' | 'book'
-    | 'ball' | 'market' | 'user' | 'check';
+    | 'ball' | 'market' | 'user' | 'check'| 'lock';
   size?: number;
   className?: string;
 }
@@ -38,6 +38,18 @@ export default function Icon({ name, size = 22, className = '' }: IconProps) {
     market: <><path d="M3 9h18l-2-5H5z" /><path d="M5 9v11h14V9" /><path d="M8 20v-6h4v6M15 13h2" /></>,
     user: <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0116 0" /></>,
     check: <path d="M5 12l4 4L19 6" />,
+    lock: (
+  <>
+    <rect
+      x="5"
+      y="10"
+      width="14"
+      height="10"
+      rx="2"
+    />
+    <path d="M8 10V7a4 4 0 018 0v3" />
+  </>
+),
   };
 
   return <svg {...common}>{paths[name]}</svg>;
