@@ -59,7 +59,6 @@ interface GameSceneProps {
     (name: string) => void;
 
   points: number;
-  stars: number;
 
   onNextLevel?: () => void;
 
@@ -83,7 +82,6 @@ export default function GameScene({
   userName,
   onNameChange,
   points,
-  stars,
   onNextLevel,
   onExit,
   onLevelComplete,
@@ -1161,9 +1159,6 @@ export default function GameScene({
           }
           totalPoints={
             points
-          }
-          totalStars={
-            stars
           }
           onReplay={
             handleReplay
