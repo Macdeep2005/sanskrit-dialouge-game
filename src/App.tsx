@@ -30,11 +30,6 @@ export default function App() {
   ] = useState(0);
 
   const [
-    stars,
-    setStars,
-  ] = useState(0);
-
-  const [
     completedLevels,
     setCompletedLevels,
   ] = useState<number[]>([]);
@@ -85,10 +80,6 @@ async function awardLevel(
 
   setPoints(
     newTotalPoints
-  );
-
-  setStars(
-    value => value + 3
   );
 
   setCompletedLevels(
@@ -220,21 +211,6 @@ async function awardLevel(
 
             <span>
               Points
-            </span>
-          </div>
-
-          <div className="portal-stat">
-            <Icon
-              name="star"
-              size={18}
-            />
-
-            <strong>
-              {stars}
-            </strong>
-
-            <span>
-              Stars
             </span>
           </div>
 
@@ -435,9 +411,6 @@ async function awardLevel(
             }
             points={
               points
-            }
-            stars={
-              stars
             }
             onLevelComplete={
               awardLevel
