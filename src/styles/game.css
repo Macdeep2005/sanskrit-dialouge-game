@@ -164,7 +164,6 @@
 .complete-heading p { margin: 0 0 4px; color: var(--brown); font-size: .78rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; }
 .complete-heading h2 { margin: 0; color: var(--navy); font-family: var(--font-display); font-size: 2.45rem; }
 .complete-heading span { color: var(--slate); }
-.complete-stars { display: flex; align-items: center; gap: 4px; color: #fbbf24; }
 .complete-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .complete-stats > div { padding: 16px; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center; border-radius: 15px; background: var(--cream); }
 .complete-stats svg { grid-row: 1 / span 2; color: var(--teal-dark); }
