@@ -44,7 +44,7 @@
         "npcText": "Hello, {name}! Your name in Sanskrit can be written as {sanskritName}.",
         "npcTranslation": "Now, how would you introduce yourself?",
 
-        "npcAudioPath": "/audio/intro/i2_npc.mp3",
+        "npcAudioPath": "",
 
         "backgroundImage": "/backgrounds/classroom.png",
 
@@ -646,7 +646,7 @@
       "npcText": "नमस्ते। भवान् किं खादितुम् इच्छति?",
       "npcTranslation": "Hello. What would you like to eat?",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level4/r1_npc.mp3",
 
       "backgroundImage": "/backgrounds/restaurant.png",
 
@@ -665,7 +665,7 @@
           "id": "r1a",
           "choiceText": "अहं शाकाहारी भोजनं इच्छामि।",
           "choiceTranslation": "I would like a vegetarian meal.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r1a.mp3",
           "isCorrect": true,
           "nextNodeId": "r2"
         },
@@ -673,7 +673,7 @@
           "id": "r1b",
           "choiceText": "भोजनस्य मूल्यं कुत्र अस्ति?",
           "choiceTranslation": "Where is the price of the food?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r1b.mp3",
           "isCorrect": false,
           "feedback": "The waiter asked what you would like to eat.",
           "nextNodeId": "r2"
@@ -682,7 +682,7 @@
           "id": "r1c",
           "choiceText": "अहं विद्यालयं गच्छामि।",
           "choiceTranslation": "I am going to school.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r1c.mp3",
           "isCorrect": false,
           "feedback": "Respond to the waiter about your food order.",
           "nextNodeId": "r2"
@@ -697,7 +697,7 @@
       "npcText": "अस्तु। किं पातुम् इच्छति?",
       "npcTranslation": "Alright. What would you like to drink?",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level4/r2_npc.mp3",
 
       "backgroundImage": "/backgrounds/restaurant.png",
 
@@ -716,7 +716,7 @@
           "id": "r2a",
           "choiceText": "कृपया जलं यच्छतु।",
           "choiceTranslation": "Please give me water.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r2a.mp3",
           "isCorrect": true,
           "nextNodeId": "r3"
         },
@@ -724,7 +724,7 @@
           "id": "r2b",
           "choiceText": "आम्, भोजनं स्वादिष्टम् अस्ति।",
           "choiceTranslation": "Yes, the food is delicious.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r2b.mp3",
           "isCorrect": false,
           "feedback": "The waiter asked what you would like to drink.",
           "nextNodeId": "r3"
@@ -733,7 +733,7 @@
           "id": "r2c",
           "choiceText": "कृपया फलानि यच्छतु।",
           "choiceTranslation": "Please give me fruits.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r2c.mp3",
           "isCorrect": false,
           "feedback": "Choose a drink in response to the waiter.",
           "nextNodeId": "r3"
@@ -748,7 +748,7 @@
       "npcText": "भोजनं समाप्तम्। अन्यत् किमपि इच्छति?",
       "npcTranslation": "You have finished your meal. Would you like anything else?",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level4/r3_npc.mp3",
 
       "backgroundImage": "/backgrounds/restaurant.png",
 
@@ -767,7 +767,7 @@
           "id": "r3a",
           "choiceText": "न धन्यवादः। कृपया मूल्यपत्रं यच्छतु।",
           "choiceTranslation": "No thank you. Please give me the bill.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r3a.mp3",
           "isCorrect": true,
           "nextNodeId": "END"
         },
@@ -775,7 +775,7 @@
           "id": "r3b",
           "choiceText": "आम्, अहं गृहं गच्छामि।",
           "choiceTranslation": "Yes, I am going home.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r3b.mp3",
           "isCorrect": false,
           "feedback": "A restaurant conversation should end by responding about the order or bill.",
           "nextNodeId": "END"
@@ -784,7 +784,7 @@
           "id": "r3c",
           "choiceText": "कृपया पुनः जलं यच्छतु।",
           "choiceTranslation": "Please give me water again.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level4/r3c.mp3",
           "isCorrect": false,
           "feedback": "This is possible, but asking for the bill best completes this conversation.",
           "nextNodeId": "END"
@@ -811,7 +811,7 @@
       "npcText": "नमस्ते। भवान् कुत्र गन्तुम् इच्छति?",
       "npcTranslation": "Hello. Where would you like to go?",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level5/d1_npc.mp3",
 
       "backgroundImage": "/backgrounds/directions-street.png",
 
@@ -830,7 +830,7 @@
           "id": "d1a",
           "choiceText": "अहं रेलस्थानकं गन्तुम् इच्छामि।",
           "choiceTranslation": "I would like to go to the railway station.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d1a.mp3",
           "isCorrect": true,
           "nextNodeId": "d2"
         },
@@ -838,7 +838,7 @@
           "id": "d1b",
           "choiceText": "रेलयानं कदा आगच्छति?",
           "choiceTranslation": "When does the train arrive?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d1b.mp3",
           "isCorrect": false,
           "feedback": "First tell the person where you want to go.",
           "nextNodeId": "d2"
@@ -847,7 +847,7 @@
           "id": "d1c",
           "choiceText": "अहं भोजनं इच्छामि।",
           "choiceTranslation": "I want food.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d1c.mp3",
           "isCorrect": false,
           "feedback": "The question is asking about your destination.",
           "nextNodeId": "d2"
@@ -862,7 +862,7 @@
       "npcText": "सीधं गच्छतु, ततः दक्षिणतः परिवर्तताम्।",
       "npcTranslation": "Go straight, then turn right.",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level5/d2_npc.mp3",
 
       "backgroundImage": "/backgrounds/directions-street.png",
 
@@ -881,7 +881,7 @@
           "id": "d2a",
           "choiceText": "सीधं गत्वा दक्षिणतः परिवर्ते, किम्?",
           "choiceTranslation": "I go straight and then turn right, correct?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d2a.mp3",
           "isCorrect": true,
           "nextNodeId": "d3"
         },
@@ -889,7 +889,7 @@
           "id": "d2b",
           "choiceText": "सीधं गत्वा वामतः परिवर्ते, किम्?",
           "choiceTranslation": "I go straight and then turn left, correct?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d2b.mp3",
           "isCorrect": false,
           "feedback": "The direction given was right, not left.",
           "nextNodeId": "d3"
@@ -898,7 +898,7 @@
           "id": "d2c",
           "choiceText": "अहं अत्र तिष्ठामि।",
           "choiceTranslation": "I will stay here.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d2c.mp3",
           "isCorrect": false,
           "feedback": "Repeat the directions to confirm you understood them.",
           "nextNodeId": "d3"
@@ -913,7 +913,7 @@
       "npcText": "आम्। ततः रेलस्थानकं भवतः वामभागे भविष्यति।",
       "npcTranslation": "Yes. Then the railway station will be on your left.",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level5/d3_npc.mp3",
 
       "backgroundImage": "/backgrounds/directions-street.png",
 
@@ -932,7 +932,7 @@
           "id": "d3a",
           "choiceText": "धन्यवादः। अधुना मार्गं जानामि।",
           "choiceTranslation": "Thank you. Now I know the way.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d3a.mp3",
           "isCorrect": true,
           "nextNodeId": "END"
         },
@@ -940,7 +940,7 @@
           "id": "d3b",
           "choiceText": "न, अहं भोजनालयं गच्छामि।",
           "choiceTranslation": "No, I am going to a restaurant.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d3b.mp3",
           "isCorrect": false,
           "feedback": "You were asking for directions to the railway station.",
           "nextNodeId": "END"
@@ -949,7 +949,7 @@
           "id": "d3c",
           "choiceText": "रेलस्थानकं दक्षिणभागे अस्ति।",
           "choiceTranslation": "The railway station is on the right.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level5/d3c.mp3",
           "isCorrect": false,
           "feedback": "The speaker said it will be on your left.",
           "nextNodeId": "END"
@@ -976,7 +976,7 @@
       "npcText": "नमस्ते। भवान् कुत्र गन्तुम् इच्छति?",
       "npcTranslation": "Hello. Where would you like to travel?",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level6/b1_npc.mp3",
 
       "backgroundImage": "/backgrounds/bus-station.png",
 
@@ -995,7 +995,7 @@
           "id": "b1a",
           "choiceText": "अहं दिल्लीं गन्तुम् इच्छामि।",
           "choiceTranslation": "I would like to go to Delhi.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b1a.mp3",
           "isCorrect": true,
           "nextNodeId": "b2"
         },
@@ -1003,7 +1003,7 @@
           "id": "b1b",
           "choiceText": "बसयानं कदा आगच्छति?",
           "choiceTranslation": "When does the bus arrive?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b1b.mp3",
           "isCorrect": false,
           "feedback": "First tell the clerk your destination.",
           "nextNodeId": "b2"
@@ -1012,7 +1012,7 @@
           "id": "b1c",
           "choiceText": "मम मित्रं दिल्लीं गच्छति।",
           "choiceTranslation": "My friend is going to Delhi.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b1c.mp3",
           "isCorrect": false,
           "feedback": "The clerk asked where you want to travel.",
           "nextNodeId": "b2"
@@ -1027,7 +1027,7 @@
       "npcText": "दिल्लीगामिनी बस् सायं षड्वादने प्रस्थास्यति।",
       "npcTranslation": "The bus to Delhi will leave at six in the evening.",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level6/b2_npc.mp3",
 
       "backgroundImage": "/backgrounds/bus-station.png",
 
@@ -1046,7 +1046,7 @@
           "id": "b2a",
           "choiceText": "एकं यात्रापत्रं यच्छतु।",
           "choiceTranslation": "Please give me one ticket.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b2a.mp3",
           "isCorrect": true,
           "nextNodeId": "b3"
         },
@@ -1054,7 +1054,7 @@
           "id": "b2b",
           "choiceText": "बस् प्रातः षड्वादने प्रस्थास्यति।",
           "choiceTranslation": "The bus leaves at six in the morning.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b2b.mp3",
           "isCorrect": false,
           "feedback": "The clerk said six in the evening.",
           "nextNodeId": "b3"
@@ -1063,7 +1063,7 @@
           "id": "b2c",
           "choiceText": "अहं श्वः आगमिष्यामि।",
           "choiceTranslation": "I will come tomorrow.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b2c.mp3",
           "isCorrect": false,
           "feedback": "You can continue by requesting a ticket for the announced bus.",
           "nextNodeId": "b3"
@@ -1078,7 +1078,7 @@
       "npcText": "यात्रापत्रस्य मूल्यं पञ्चशतं रूप्यकाणि।",
       "npcTranslation": "The ticket costs 500 rupees.",
 
-      "npcAudioPath": "",
+      "npcAudioPath": "/audio/level6/b3_npc.mp3",
 
       "backgroundImage": "/backgrounds/bus-station.png",
 
@@ -1097,7 +1097,7 @@
           "id": "b3a",
           "choiceText": "अस्तु। अहं पञ्चशतं रूप्यकाणि ददामि।",
           "choiceTranslation": "Alright. I will pay 500 rupees.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b3a.mp3",
           "isCorrect": true,
           "nextNodeId": "END"
         },
@@ -1105,7 +1105,7 @@
           "id": "b3b",
           "choiceText": "अहं पञ्चाशतं रूप्यकाणि ददामि।",
           "choiceTranslation": "I will pay 50 rupees.",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b3b.mp3",
           "isCorrect": false,
           "feedback": "The ticket costs 500 rupees, not 50.",
           "nextNodeId": "END"
@@ -1114,7 +1114,7 @@
           "id": "b3c",
           "choiceText": "बसयानं कुत्र खादति?",
           "choiceTranslation": "Where does the bus eat?",
-          "choiceAudioPath": "",
+          "choiceAudioPath": "/audio/level6/b3c.mp3",
           "isCorrect": false,
           "feedback": "Respond to the ticket price.",
           "nextNodeId": "END"
