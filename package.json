@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "audio:all": "node --env-file-if-exists=.env.local scripts/download-level2-audio.mjs",
+    "audio:level2": "npm run audio:all",
     "format": "oxfmt"
   },
   "dependencies": {
