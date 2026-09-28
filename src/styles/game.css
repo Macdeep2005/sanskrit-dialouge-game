@@ -157,23 +157,180 @@
 .game-large-text .dialogue-english, .game-large-text .choice-copy small { font-size: 1.08rem; }
 .game-large-text .choice-copy strong { font-size: 1.38rem; }
 
-.complete-overlay { position: absolute; inset: 0; z-index: 90; display: grid; place-items: center; padding: 22px; background: rgba(30,41,59,.78); backdrop-filter: blur(8px); }
-.complete-card { width: min(560px, 100%); padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 21px; border-radius: 28px; background: var(--white); box-shadow: 0 28px 80px rgba(15,23,42,.4); }
-.complete-check { width: 70px; height: 70px; display: grid; place-items: center; border-radius: 22px; color: var(--white); background: var(--teal-dark); }
-.complete-heading { text-align: center; }
-.complete-heading p { margin: 0 0 4px; color: var(--brown); font-size: .78rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; }
-.complete-heading h2 { margin: 0; color: var(--navy); font-family: var(--font-display); font-size: 2.45rem; }
-.complete-heading span { color: var(--slate); }
-.complete-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.complete-stats > div { padding: 16px; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center; border-radius: 15px; background: var(--cream); }
-.complete-stats svg { grid-row: 1 / span 2; color: var(--teal-dark); }
-.complete-stats div:nth-child(2) svg { color: var(--orange); }
-.complete-stats span { color: var(--slate); font-size: .8rem; }
-.complete-stats strong { color: var(--navy); font-family: var(--font-display); font-size: 1.45rem; }
-.complete-actions { width: 100%; display: grid; gap: 10px; }
-.complete-final-message { min-height: 52px; display: grid; place-items: center; border-radius: 14px; color: var(--teal-dark); background: rgba(45,212,191,.12); font-weight: 800; }
-.complete-menu-button { border: 0; background: transparent; color: var(--slate); font-weight: 800; min-height: 42px; }
+.complete-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
 
+  display: grid;
+  place-items: center;
+
+  padding: 18px;
+
+  background: rgba(30, 41, 59, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.complete-card {
+  width: min(520px, 94%);
+
+  padding: 28px 34px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 16px;
+
+  border-radius: 26px;
+
+  background: var(--white);
+
+  box-shadow:
+    0 28px 80px
+    rgba(15, 23, 42, 0.4);
+}
+
+.complete-check {
+  width: 64px;
+  height: 64px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 20px;
+
+  color: var(--white);
+  background: var(--teal-dark);
+}
+
+.complete-heading {
+  text-align: center;
+}
+
+.complete-heading p {
+  margin: 0 0 5px;
+
+  color: var(--brown);
+
+  font-size: 0.85rem;
+  font-weight: 900;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.complete-heading h2 {
+  margin: 0;
+
+  color: var(--navy);
+
+  font-family: var(--font-display);
+
+  font-size: 2.7rem;
+  line-height: 1.05;
+}
+
+.complete-heading span {
+  display: block;
+
+  margin-top: 8px;
+
+  color: var(--slate);
+
+  font-size: 1.05rem;
+}
+
+.complete-stats {
+  width: min(300px, 100%);
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  margin: 4px auto;
+}
+
+.complete-stats > div {
+  padding: 15px 18px;
+
+  display: grid;
+
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+
+  align-items: center;
+
+  border-radius: 16px;
+
+  background: var(--cream);
+}
+
+.complete-stats svg {
+  grid-row: 1 / span 2;
+
+  color: var(--teal-dark);
+}
+
+.complete-stats span {
+  color: var(--slate);
+
+  font-size: 0.82rem;
+}
+
+.complete-stats strong {
+  color: var(--navy);
+
+  font-family: var(--font-display);
+
+  font-size: 1.55rem;
+}
+
+.complete-actions {
+  width: min(400px, 100%);
+
+  display: grid;
+  gap: 9px;
+
+  margin-top: 3px;
+}
+
+.complete-actions .button {
+  min-height: 46px;
+
+  padding: 0 16px;
+
+  border-radius: 13px;
+
+  font-size: 0.92rem;
+}
+
+.complete-final-message {
+  min-height: 46px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  color: var(--teal-dark);
+
+  background: rgba(45, 212, 191, 0.12);
+
+  font-weight: 800;
+}
+
+.complete-menu-button {
+  min-height: 34px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--slate);
+
+  font-size: 0.9rem;
+  font-weight: 800;
+}
 @keyframes characterEnter { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
 @media (max-width: 1000px) {
