@@ -5,13 +5,12 @@ interface LevelCompleteProps {
   isLastLevel: boolean;
   nextLevelName: string;
   totalPoints: number;
-  totalStars: number;
   onReplay: () => void;
   onNext: () => void;
   onMenu: () => void;
 }
 
-export default function LevelComplete({ levelNum, isLastLevel, nextLevelName, totalPoints, totalStars, onReplay, onNext, onMenu }: LevelCompleteProps) {
+export default function LevelComplete({ levelNum, isLastLevel, nextLevelName, totalPoints, onReplay, onNext, onMenu }: LevelCompleteProps) {
   return (
     <div className="complete-overlay">
       <section className="complete-card">
@@ -22,13 +21,8 @@ export default function LevelComplete({ levelNum, isLastLevel, nextLevelName, to
           <span>You completed the branching conversation.</span>
         </div>
 
-        <div className="complete-stars" aria-label="3 stars earned">
-          <Icon name="star" size={42} /><Icon name="star" size={52} /><Icon name="star" size={42} />
-        </div>
-
         <div className="complete-stats">
           <div><Icon name="points" size={24} /><span>Total points</span><strong>{totalPoints}</strong></div>
-          <div><Icon name="star" size={24} /><span>Total stars</span><strong>{totalStars}</strong></div>
         </div>
 
         <div className="complete-actions">
