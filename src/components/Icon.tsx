@@ -1,7 +1,7 @@
 interface IconProps {
   name:
     | 'play' | 'login' | 'userPlus' | 'settings' | 'volume' | 'close'
-    | 'exit' | 'star' | 'points' | 'arrow' | 'replay' | 'book'
+    | 'exit' | 'points' | 'arrow' | 'replay' | 'book'
     | 'ball' | 'market' | 'user' | 'check'| 'lock';
   size?: number;
   className?: string;
@@ -29,7 +29,6 @@ export default function Icon({ name, size = 22, className = '' }: IconProps) {
     volume: <><path d="M11 5L6 9H2v6h4l5 4z" /><path d="M15.5 8.5a5 5 0 010 7" /><path d="M18 6a8 8 0 010 12" /></>,
     close: <path d="M18 6L6 18M6 6l12 12" />,
     exit: <><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /><path d="M21 19V5a2 2 0 00-2-2h-6" /></>,
-    star: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" />,
     points: <><circle cx="12" cy="12" r="9" /><path d="M12 7v10M9 10h4.5a2 2 0 010 4H10a2 2 0 000 4h5" /></>,
     arrow: <><path d="M5 12h14M13 6l6 6-6 6" /></>,
     replay: <><path d="M3 12a9 9 0 109-9 9 9 0 00-6.36 2.64L3 8" /><path d="M3 3v5h5" /></>,
