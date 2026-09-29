@@ -4,8 +4,6 @@ An interactive, browser-based conversation game for practising Sanskrit through 
 
 The game is built as a single-page React application for the Zat.am portal. It currently contains **seven scenarios**, **67 referenced MP3 clips**, illustrated scene backgrounds, character art, Google sign-in, and optional daily leaderboard submission.
 
-> The repository directory is named `sanskrit-dialouge-game` for historical reasons. The product name throughout the application is **Sanskrit Dialogue Game**.
-
 ## Contents
 
 - [What players can do](#what-players-can-do)
