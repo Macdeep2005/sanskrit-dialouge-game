@@ -116,6 +116,21 @@ input:focus-visible {
   background: var(--cream);
 }
 
+.portal-load-state {
+  flex: 1;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+}
+
+.portal-load-state h1,
+.portal-load-state p {
+  margin: 0;
+}
+
 .portal-topbar {
   height: 74px;
   flex: 0 0 74px;

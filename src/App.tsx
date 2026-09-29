@@ -1,15 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import GameScene from "./components/GameScene";
 import Icon from "./components/Icon";
 
-import { LEVELS } from "./data/gameData";
+import { loadLevels } from "./data/gameData";
+import type { Level } from "./types/gameTypes";
 
 import { useAuth } from "./hooks/useAuth";
 
 import { useLeaderboard } from "./hooks/useLeaderboard";
 
 export default function App() {
+  const [levels, setLevels] = useState<Level[] | null>(null);
+
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const [loadAttempt, setLoadAttempt] = useState(0);
+
   const [currentLevel, setCurrentLevel] = useState(0);
 
   const [playerName, setPlayerName] = useState("");
@@ -27,8 +34,36 @@ export default function App() {
   const { leaderboardMessage, submittingScore, submitLeaderboardScore } =
     useLeaderboard(user, points);
 
+  useEffect(() => {
+    let active = true;
+
+    setLevels(null);
+    setLoadError(null);
+
+    loadLevels()
+      .then((loadedLevels) => {
+        if (active) {
+          setLevels(loadedLevels);
+          setCurrentLevel(0);
+        }
+      })
+      .catch((error: unknown) => {
+        console.error("Could not load game levels:", error);
+
+        if (active) {
+          setLoadError(
+            error instanceof Error ? error.message : "Unknown loading error.",
+          );
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [loadAttempt]);
+
   async function awardLevel(levelNumber: number) {
-    if (awardedLevels.current.has(levelNumber)) {
+    if (!levels || awardedLevels.current.has(levelNumber)) {
       return;
     }
 
@@ -44,7 +79,7 @@ export default function App() {
       current.includes(levelNumber) ? current : [...current, levelNumber],
     );
 
-    const isFinalLevel = levelNumber === LEVELS[LEVELS.length - 1].id;
+    const isFinalLevel = levelNumber === levels[levels.length - 1].id;
 
     if (isFinalLevel && user) {
       try {
@@ -64,7 +99,32 @@ export default function App() {
   }
 
   function goToNextLevel() {
-    setCurrentLevel((current) => Math.min(current + 1, LEVELS.length - 1));
+    if (!levels) {
+      return;
+    }
+
+    setCurrentLevel((current) => Math.min(current + 1, levels.length - 1));
+  }
+
+  if (!levels) {
+    return (
+      <div className="portal-game-shell">
+        <main className="portal-load-state" aria-live="polite">
+          <h1>{loadError ? "Could not load game content" : "Loading game content..."}</h1>
+          {loadError && (
+            <>
+              <p>{loadError}</p>
+              <button
+                className="button button-teal"
+                onClick={() => setLoadAttempt((attempt) => attempt + 1)}
+              >
+                Retry loading
+              </button>
+            </>
+          )}
+        </main>
+      </div>
+    );
   }
 
   return (
@@ -133,18 +193,18 @@ export default function App() {
             </div>
 
             <small>
-              {completedLevels.length}/{LEVELS.length}
+              {completedLevels.length}/{levels.length}
             </small>
           </div>
 
           <div className="level-sidebar-scroll">
-            {LEVELS.map((level, index) => {
+            {levels.map((level, index) => {
               const active = index === currentLevel;
 
               const complete = completedLevels.includes(level.id);
 
               const unlocked =
-                index === 0 || completedLevels.includes(LEVELS[index - 1].id);
+                index === 0 || completedLevels.includes(levels[index - 1].id);
 
               const locked = !unlocked;
 
@@ -210,6 +270,7 @@ export default function App() {
         <main className="portal-game-main">
           <GameScene
             key={currentLevel}
+            levels={levels}
             levelIndex={currentLevel}
             userName={playerName}
             onNameChange={setPlayerName}
