@@ -1,132 +1,62 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
-import GameScene from './components/GameScene';
-import Icon from './components/Icon';
+import GameScene from "./components/GameScene";
+import Icon from "./components/Icon";
 
-import { LEVELS } from './data/gameData';
+import { LEVELS } from "./data/gameData";
 
-import {
-  useAuth,
-} from './hooks/useAuth';
+import { useAuth } from "./hooks/useAuth";
 
-import {
-  useLeaderboard,
-} from './hooks/useLeaderboard';
+import { useLeaderboard } from "./hooks/useLeaderboard";
 
 export default function App() {
-  const [
-    currentLevel,
-    setCurrentLevel,
-  ] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState(0);
 
-  const [
-    playerName,
-    setPlayerName,
-  ] = useState('');
+  const [playerName, setPlayerName] = useState("");
 
-  const [
-    points,
-    setPoints,
-  ] = useState(0);
+  const [points, setPoints] = useState(0);
 
-  const [
-    completedLevels,
-    setCompletedLevels,
-  ] = useState<number[]>([]);
+  const [completedLevels, setCompletedLevels] = useState<number[]>([]);
 
-  const [
-    settingsOpen,
-    setSettingsOpen,
-  ] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
-  const awardedLevels =
-    useRef(new Set<number>());
+  const awardedLevels = useRef(new Set<number>());
 
-const {
-  user,
-  authLoading,
-  signingIn,
-  signInForTesting,
-} = useAuth();
+  const { user, authLoading, signingIn, signInForTesting } = useAuth();
 
-  const {
-    leaderboardMessage,
-    submittingScore,
-    submitLeaderboardScore,
-  } = useLeaderboard(
-    user,
-    points
-  );
+  const { leaderboardMessage, submittingScore, submitLeaderboardScore } =
+    useLeaderboard(user, points);
 
-async function awardLevel(
-  levelNumber: number
-) {
-  if (
-    awardedLevels.current.has(
-      levelNumber
-    )
-  ) {
-    return;
-  }
+  async function awardLevel(levelNumber: number) {
+    if (awardedLevels.current.has(levelNumber)) {
+      return;
+    }
 
-  awardedLevels.current.add(
-    levelNumber
-  );
+    awardedLevels.current.add(levelNumber);
 
-  const pointsEarned = 50;
+    const pointsEarned = 50;
 
-  const newTotalPoints =
-    points + pointsEarned;
+    const newTotalPoints = points + pointsEarned;
 
-  setPoints(
-    newTotalPoints
-  );
+    setPoints(newTotalPoints);
 
-  setCompletedLevels(
-    current =>
-      current.includes(
-        levelNumber
-      )
-        ? current
-        : [
-            ...current,
-            levelNumber,
-          ]
-  );
+    setCompletedLevels((current) =>
+      current.includes(levelNumber) ? current : [...current, levelNumber],
+    );
 
-  const isFinalLevel =
-    levelNumber ===
-    LEVELS[
-      LEVELS.length - 1
-    ].id;
+    const isFinalLevel = levelNumber === LEVELS[LEVELS.length - 1].id;
 
-  if (
-    isFinalLevel &&
-    user
-  ) {
-    try {
-      await submitLeaderboardScore(
-        newTotalPoints
-      );
-    } catch (error) {
-      console.error(
-        'Could not submit final score:',
-        error
-      );
+    if (isFinalLevel && user) {
+      try {
+        await submitLeaderboardScore(newTotalPoints);
+      } catch (error) {
+        console.error("Could not submit final score:", error);
+      }
     }
   }
-}
 
-  function deductPoints(
-    amount: number
-  ) {
-    setPoints(
-      value =>
-        Math.max(
-          0,
-          value - amount
-        )
-    );
+  function deductPoints(amount: number) {
+    setPoints((value) => Math.max(0, value - amount));
   }
 
   function deductPointsForWrongAnswer() {
@@ -134,311 +64,166 @@ async function awardLevel(
   }
 
   function goToNextLevel() {
-    setCurrentLevel(
-      current =>
-        Math.min(
-          current + 1,
-          LEVELS.length - 1
-        )
-    );
+    setCurrentLevel((current) => Math.min(current + 1, LEVELS.length - 1));
   }
 
   return (
     <div className="portal-game-shell">
-
       <header className="portal-topbar">
-
         <div className="portal-title-group">
-
-          <div className="portal-mark">
-            सं
-          </div>
+          <div className="portal-mark">सं</div>
 
           <div>
-            <span className="portal-kicker">
-              Sanskrit Dialogue
-            </span>
+            <span className="portal-kicker">Sanskrit Dialogue</span>
 
-            <strong>
-              Conversation Game
-            </strong>
+            <strong>Conversation Game</strong>
           </div>
-
         </div>
 
         <div className="portal-user-area">
           {authLoading ? (
-  <div className="portal-stat">
-    <strong>Checking user...</strong>
-  </div>
-) : user ? (
-  <div className="portal-stat">
-    <strong>
-      {user.displayName ||
-        user.email ||
-        'Signed in'}
-    </strong>
-  </div>
-) : (
-  <button
-    className="button button-teal"
-    onClick={signInForTesting}
-    disabled={signingIn}
-  >
-    {signingIn
-      ? 'Signing in...'
-      : 'Test Zat.am Login'}
-  </button>
-)}
+            <div className="portal-stat">
+              <strong>Checking user...</strong>
+            </div>
+          ) : user ? (
+            <div className="portal-stat">
+              <strong>{user.displayName || user.email || "Signed in"}</strong>
+            </div>
+          ) : (
+            <button
+              className="button button-teal"
+              onClick={signInForTesting}
+              disabled={signingIn}
+            >
+              {signingIn ? "Signing in..." : "Zat.am Login"}
+            </button>
+          )}
 
           {playerName && (
             <div className="portal-stat">
-              <strong>
-                {playerName}
-              </strong>
+              <strong>{playerName}</strong>
             </div>
           )}
 
           <div className="portal-stat">
-            <Icon
-              name="points"
-              size={18}
-            />
+            <Icon name="points" size={18} />
 
-            <strong>
-              {points}
-            </strong>
+            <strong>{points}</strong>
 
-            <span>
-              Points
-            </span>
+            <span>Points</span>
           </div>
 
           <button
             className="portal-settings-button"
-            onClick={() =>
-              setSettingsOpen(
-                open => !open
-              )
-            }
+            onClick={() => setSettingsOpen((open) => !open)}
             aria-label="Settings"
           >
-            <Icon
-              name="settings"
-              size={21}
-            />
+            <Icon name="settings" size={21} />
           </button>
-
         </div>
-
       </header>
 
       <div className="portal-body">
-
         <aside className="level-sidebar">
-
           <div className="level-sidebar-header">
-
             <div>
-              <span>
-                LEVELS
-              </span>
+              <span>LEVELS</span>
 
-              <strong>
-                Select a scenario
-              </strong>
+              <strong>Select a scenario</strong>
             </div>
 
             <small>
-              {completedLevels.length}/
-              {LEVELS.length}
+              {completedLevels.length}/{LEVELS.length}
             </small>
-
           </div>
 
           <div className="level-sidebar-scroll">
+            {LEVELS.map((level, index) => {
+              const active = index === currentLevel;
 
-            {LEVELS.map(
-              (
-                level,
-                index
-              ) => {
-                const active =
-                  index ===
-                  currentLevel;
+              const complete = completedLevels.includes(level.id);
 
-                const complete =
-                  completedLevels.includes(
-                    level.id
-                  );
+              const unlocked =
+                index === 0 || completedLevels.includes(LEVELS[index - 1].id);
 
-                const unlocked =
-                  index === 0 ||
-                  completedLevels.includes(
-                    LEVELS[index - 1].id
-                  );
+              const locked = !unlocked;
 
-                const locked =
-                  !unlocked;
-
-                return (
-                  <button
-                    key={level.id}
-
-                    className={
-                      `level-sidebar-card${
-                        active
-                          ? ' active'
-                          : ''
-                      }${
-                        locked
-                          ? ' locked'
-                          : ''
-                      }`
+              return (
+                <button
+                  key={level.id}
+                  className={`level-sidebar-card${active ? " active" : ""}${
+                    locked ? " locked" : ""
+                  }`}
+                  disabled={locked}
+                  aria-disabled={locked}
+                  aria-label={
+                    locked
+                      ? `${level.title} ${level.subtitle} locked`
+                      : `${level.title} ${level.subtitle}`
+                  }
+                  onClick={() => {
+                    if (locked) {
+                      return;
                     }
 
-                    disabled={locked}
-
-                    aria-disabled={
-                      locked
-                    }
-
-                    aria-label={
-                      locked
-                        ? `${level.title} ${level.subtitle} locked`
-                        : `${level.title} ${level.subtitle}`
-                    }
-
-                    onClick={() => {
-                      if (locked) {
-                        return;
-                      }
-
-                      setCurrentLevel(
-                        index
-                      );
+                    setCurrentLevel(index);
+                  }}
+                >
+                  <div
+                    className="level-sidebar-thumb"
+                    style={{
+                      backgroundImage: `url(${level.thumbnailImage})`,
                     }}
                   >
+                    <span className="level-sidebar-number">
+                      {String(level.id).padStart(2, "0")}
+                    </span>
 
-                    <div
-                      className="level-sidebar-thumb"
-                      style={{
-                        backgroundImage:
-                          `url(${level.thumbnailImage})`,
-                      }}
-                    >
-
-                      <span className="level-sidebar-number">
-                        {String(
-                          level.id
-                        ).padStart(
-                          2,
-                          '0'
-                        )}
+                    {complete ? (
+                      <span className="level-sidebar-complete">
+                        <Icon name="check" size={15} />
                       </span>
-
-                      {complete ? (
-
-                        <span className="level-sidebar-complete">
-                          <Icon
-                            name="check"
-                            size={15}
-                          />
-                        </span>
-
-                      ) : locked ? (
-
-                        <span className="level-sidebar-lock">
-                          <Icon
-                            name="lock"
-                            size={16}
-                          />
-                        </span>
-
-                      ) : null}
-
-                    </div>
-
-                    <div className="level-sidebar-copy">
-
-                      <small>
-                        {
-                          level.title
-                        }
-                      </small>
-
-                      <strong>
-                        {level.subtitle.replace(
-                          'The ',
-                          ''
-                        )}
-                      </strong>
-
-                      <span>
-                        {locked
-                          ? 'Locked'
-                          : `${Object.keys(
-                              level.nodes
-                            ).length} dialogue nodes`
-                        }
+                    ) : locked ? (
+                      <span className="level-sidebar-lock">
+                        <Icon name="lock" size={16} />
                       </span>
+                    ) : null}
+                  </div>
 
-                    </div>
+                  <div className="level-sidebar-copy">
+                    <small>{level.title}</small>
 
-                  </button>
-                );
-              }
-            )}
+                    <strong>{level.subtitle.replace("The ", "")}</strong>
 
+                    <span>
+                      {locked
+                        ? "Locked"
+                        : `${Object.keys(level.nodes).length} dialogue nodes`}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
-
         </aside>
 
         <main className="portal-game-main">
-
           <GameScene
-            key={
-              currentLevel
-            }
-            levelIndex={
-              currentLevel
-            }
-            userName={
-              playerName
-            }
-            onNameChange={
-              setPlayerName
-            }
-            points={
-              points
-            }
-            onLevelComplete={
-              awardLevel
-            }
-            onWrongAnswer={
-              deductPointsForWrongAnswer
-            }
-            onHintUsed={
-              deductPoints
-            }
-            onNextLevel={
-              goToNextLevel
-            }
+            key={currentLevel}
+            levelIndex={currentLevel}
+            userName={playerName}
+            onNameChange={setPlayerName}
+            points={points}
+            onLevelComplete={awardLevel}
+            onWrongAnswer={deductPointsForWrongAnswer}
+            onHintUsed={deductPoints}
+            onNextLevel={goToNextLevel}
             onExit={() => {}}
-            externalSettingsOpen={
-              settingsOpen
-            }
-            onExternalSettingsClose={() =>
-              setSettingsOpen(
-                false
-              )
-            }
+            externalSettingsOpen={settingsOpen}
+            onExternalSettingsClose={() => setSettingsOpen(false)}
           />
-
         </main>
-
       </div>
-
     </div>
   );
 }
