@@ -7,9 +7,9 @@ import {
 
 import {
   Choice,
-  LEVELS,
   DialogueNode,
-} from '../data/gameData';
+  Level,
+} from '../types/gameTypes';
 
 import CharacterSprite from './CharacterSprite';
 import LevelComplete from './LevelComplete';
@@ -51,6 +51,8 @@ function shuffleChoices(
 }
 
 interface GameSceneProps {
+  levels: Level[];
+
   levelIndex: number;
 
   userName: string;
@@ -78,6 +80,7 @@ interface GameSceneProps {
 }
 
 export default function GameScene({
+  levels,
   levelIndex,
   userName,
   onNameChange,
@@ -92,7 +95,7 @@ export default function GameScene({
 }: GameSceneProps) {
 
   const level =
-    LEVELS[levelIndex];
+    levels[levelIndex];
 
   const [
     nameInput,
@@ -186,11 +189,11 @@ export default function GameScene({
 
   const isLastLevel =
     levelIndex ===
-    LEVELS.length - 1;
+    levels.length - 1;
 
   const nextLevel =
     !isLastLevel
-      ? LEVELS[levelIndex + 1]
+      ? levels[levelIndex + 1]
       : null;
 
   const correctChoice =

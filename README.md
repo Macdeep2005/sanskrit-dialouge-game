@@ -126,7 +126,7 @@ YOURVOIC_MODEL=aura-lite
 
 `.env.local` is git-ignored. Never commit an API key.
 
-`scripts/download-level2-audio.mjs` reads `src/data/levels.json`, collects NPC and answer audio paths, skips existing non-empty files, and asks YourVoic to generate the missing clips. It chooses Sanskrit or English voice/language from the clip text, retries rate-limited requests, writes to a temporary `.part` file first, and renames it only after a successful download. Dynamic name lines use an authored static template because an individual player name cannot have a pre-generated MP3.
+`scripts/download-level2-audio.mjs` reads the local `public/data/levels.json` content snapshot to collect NPC and answer audio paths, skips existing non-empty files, and asks YourVoic to generate missing clips. The game itself reads current level content from Firestore; update this local snapshot when using the script to generate audio for newly added Firebase content. Dynamic name lines use an authored static template because an individual player name cannot have a pre-generated MP3.
 
 #### Audio API used
 
@@ -157,6 +157,7 @@ Completion, unlocks, player name, and points are held in React state. They reset
 ```text
 .
 ├── public/
+│   ├── data/                 # Local content snapshot used by audio generation
 │   ├── audio/                 # MP3 clips grouped by scenario
 │   ├── backgrounds/           # Full-scene illustrations
 │   └── characters/            # Player and NPC sprite artwork
@@ -169,8 +170,8 @@ Completion, unlocks, player name, and points are held in React state. They reset
 │   │   ├── CharacterSprite.tsx
 │   │   └── Icon.tsx
 │   ├── data/
-│   │   ├── levels.json        # All scenario, node, choice, copy, and asset data
-│   │   └── gameData.ts        # Typed export of levels.json
+│   │   └── gameData.ts        # Firestore loader and level schema validation
+│   ├── levels-config.ts       # Firebase app and Firestore config for level content
 │   ├── hooks/
 │   │   ├── useAuth.ts         # Firebase authentication state and popup sign-in
 │   │   └── useLeaderboard.ts  # Score submission UI state
@@ -194,13 +195,13 @@ Completion, unlocks, player name, and points are held in React state. They reset
 
 `src/main.tsx` mounts `<App />` in React Strict Mode. `App.tsx` owns the active level, session points, completed level IDs, player name, top-bar settings state, authentication, and leaderboard submission. It passes the selected level to `GameScene.tsx`, which owns the per-level dialogue state.
 
-The app reads the JSON once through `src/data/gameData.ts` and treats it as the `Level[]` type defined in `src/types/gameTypes.ts`. Artwork and audio use paths relative to the public root, such as `./backgrounds/classroom.png` and `/audio/level2/c1_npc.mp3`.
+The app reads documents from the Firestore `levels` collection at startup. Documents named `level_1`, `level_2`, and so on are sorted by their numeric suffix; unrelated documents such as `level_test` are ignored. The document ID supplies the level `id`. Each document contains the level fields (`title`, `subtitle`, `icon`, `background`, and `nodes`, plus optional `accentColor`, `thumbnailImage`, and `startNodeId`). A level-level `background` is used as the thumbnail and as the fallback background for nodes that do not define `backgroundImage`. Artwork and audio use paths relative to the public root, such as `./backgrounds/classroom.png` and `/audio/level2/c1_npc.mp3`.
 
 Tailwind CSS v4 is installed and configured through the Vite plugin, but the current game UI is styled primarily through the two CSS files in `src/styles/`. The `@` alias resolves to `src/`.
 
 ## Author or change dialogue content
 
-All playable content lives in [`src/data/levels.json`](src/data/levels.json). Do not hard-code a new scenario in a React component; add or modify its data instead.
+All playable content lives in the Firebase `levels` collection. The browser reads it at runtime, so content edits and appended levels do not require rebuilding the JavaScript bundle. Create a document named `level_N` for each level, where `N` is a unique number. The local [`public/data/levels.json`](public/data/levels.json) file is only a content snapshot used by the audio-generation script; it is not used by the game at runtime.
 
 ### Data model
 
@@ -252,7 +253,7 @@ interface Choice {
 5. Set `requiresNameInput: true` only for the name-entry node. The tokens `{name}` and `{sanskritName}` in node/choice text are replaced at runtime with the player’s entered name and transliterated name.
 6. Supply helpful `feedback` for incorrect answers. The game falls back to a generic message when it is omitted.
 7. Use the same background and sprite paths for a coherent scene, or deliberately switch them between nodes to change the scene.
-8. Run `npm run build` after editing JSON so invalid JSON and bundling problems are caught before release.
+8. Reload the game and test the new level. The runtime loader checks required fields and a valid start node; use `npm run build` to verify the full project before a normal release.
 
 The game shows English text only when the player uses the English hint. It ignores the optional per-node `hint` object at runtime today; the interface currently uses the fixed costs described in [How scoring and progress work](#how-scoring-and-progress-work).
 
@@ -263,10 +264,10 @@ Follow this sequence to add another playable scenario without changing the dialo
 1. Choose the next numeric `id`. The array order in `levels.json` determines unlock order, so append the level after the current last level unless you intentionally want to change that order.
 2. Add a scene image to `public/backgrounds/` and player/NPC art to `public/characters/`, or reuse an existing asset. Keep the existing `./backgrounds/...` and `./characters/...` path style.
 3. Create a new audio folder, such as `public/audio/level7/`, and choose stable filenames for the NPC and each answer—for example, `m1_npc.mp3`, `m1a.mp3`, and `m1b.mp3`.
-4. Append a level object to `src/data/levels.json`. Give it a valid `startNodeId`, and add all reachable nodes to its `nodes` object.
+4. Create a `level_N` document in the Firebase `levels` collection. Set `title`, `subtitle`, `icon`, `background`, and a `nodes` object. Add `startNodeId` if the first node ID is not the first key in `nodes`.
 5. Define at least one correct choice at every answer node, mark alternatives with `isCorrect: false`, and point every `nextNodeId` to an existing node or `END`.
 6. Add the audio paths to the node and choice data. Run `npm run audio:all` to create missing static clips, or place recorded MP3 files at those exact paths.
-7. Open the game, complete the immediately preceding level to unlock the new one, exercise correct and incorrect branches, test the final review loop and audio buttons, then run `npm run build`.
+7. Reload the game, complete the immediately preceding level to unlock the new one, exercise correct and incorrect branches, and test the final review loop and audio buttons. A content-only update is made by changing Firestore; a full site release should still run `npm run build`.
 
 Use this minimal JSON pattern as a starting point. Replace the copy, paths, and identifiers with your scenario’s content:
 
