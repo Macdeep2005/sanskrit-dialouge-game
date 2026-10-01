@@ -152,6 +152,34 @@ input:focus-visible {
   gap: 12px;
 }
 
+.portal-back-button {
+  min-height: 42px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 11px;
+  color: var(--white);
+  background: rgba(255,255,255,.08);
+  font-weight: 800;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.portal-back-button:hover {
+  background: rgba(255,255,255,.16);
+  transform: translateX(-2px);
+}
+
+.portal-back-button:active {
+  transform: translateX(0) scale(.98);
+}
+
+.portal-back-button svg {
+  transform: rotate(180deg);
+}
+
 .portal-mark {
   width: 44px;
   height: 44px;
@@ -482,6 +510,15 @@ input:focus-visible {
   }
 
   .portal-title-group > div:last-child {
+    display: none;
+  }
+
+  .portal-back-button {
+    width: 42px;
+    padding: 0;
+  }
+
+  .portal-back-button span {
     display: none;
   }
 

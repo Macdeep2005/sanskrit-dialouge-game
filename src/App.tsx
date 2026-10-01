@@ -106,6 +106,10 @@ export default function App() {
     setCurrentLevel((current) => Math.min(current + 1, levels.length - 1));
   }
 
+  function goBackToGames() {
+    window.history.back();
+  }
+
   if (!levels) {
     return (
       <div className="portal-game-shell">
@@ -131,6 +135,16 @@ export default function App() {
     <div className="portal-game-shell">
       <header className="portal-topbar">
         <div className="portal-title-group">
+          <button
+            type="button"
+            className="portal-back-button"
+            onClick={goBackToGames}
+            aria-label="Back to Zat.am games"
+          >
+            <Icon name="arrow" size={20} />
+            <span>Back</span>
+          </button>
+
           <div className="portal-mark">सं</div>
 
           <div>
@@ -279,7 +293,7 @@ export default function App() {
             onWrongAnswer={deductPointsForWrongAnswer}
             onHintUsed={deductPoints}
             onNextLevel={goToNextLevel}
-            onExit={() => {}}
+            onExit={goBackToGames}
             externalSettingsOpen={settingsOpen}
             onExternalSettingsClose={() => setSettingsOpen(false)}
           />
